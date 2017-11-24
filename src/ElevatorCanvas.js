@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import Controls from './Controls'
+import Building from './visan-luokat/elevator'
+
 
 export default class ElevatorCanvas extends Component {
-  static contextTypes = {
-    canvas: PropTypes.element.isRequired
+  render () {
+    return <div>
+      <canvas ref={canvas => this.canvas = canvas } id="hissi-canvas" width="600" height="600"/>
+      <Controls moveUp={this.moveUp} moveDown={this.moveDown}/>
+    </div>
   }
 
-  render () {
-    return <div>{ this.context.canvas }</div>
- }
+  Componentdidmount () {
+    const B = new Building(10)
+    setInterval(function(){
+      B.update()
+    },100);
+  }
+
+  moveUp = () => {
+    console.log('Up')
+  }
+
+  moveDown = () => {
+    console.log('Down')
+  }
 }

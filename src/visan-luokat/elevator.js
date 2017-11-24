@@ -2,6 +2,18 @@ class Building {
   constructor(levels) {
     this.levels = levels
     this.levelHeight = 32
+    this.elevatos = [new Elevator(0, 0) ]
+    this.abajs = []
+  }
+
+  update () {
+    this.elevators.forEach(function(elevator) {
+        elevator.move();
+    })
+    this.abajs.forEach(function(abaj) {
+        abaj.move();
+    })
+
   }
 }
 
@@ -15,7 +27,8 @@ class Elevator {
     this.speed = 0.001
     this.moving = false
   }
-  move(to){
+  move(){
+    console.log("moving")
     if (this.level != this.goingTo){
       const direction = Math.sign(this.level - this.goingTo)
       this.inbetween += direction * this.speed
@@ -29,6 +42,7 @@ class Elevator {
     const direction = Math.sign(this.level - this.goingTo)
     return building.levelHeight*(this.level+this.direction*this.inbetween)
   }
+
 }
 
 function moveUp(elevator) {
