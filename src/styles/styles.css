@@ -27,9 +27,11 @@ body {
     width: 100%;
 }
 
-#game > canvas {
+#hissi-canvas {
 
     display: block;
     margin: auto auto;
     border:1px solid #000000;
 }
+
+@import 'controls.css';
