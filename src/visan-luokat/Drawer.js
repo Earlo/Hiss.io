@@ -30,7 +30,7 @@ export default class Drawer {
   }
 
   drawElevator = (height) => {
-    this.context.fillRect(300,height,20,20);
+    this.context.fillRect(23,height,20,32);
     this.context.stroke(); 
     //ctx.drawImage(url.default,300,height)
   }
