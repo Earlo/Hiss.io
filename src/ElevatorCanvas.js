@@ -19,10 +19,10 @@ export default class ElevatorCanvas extends Component {
   }
 
   moveUp = () => {
-    this.drawer.building.debugUp()
+    this.drawer.building.controlElevator(0, this.drawer.building.elevators[0].goingTo + 1)
   }
 
   moveDown = () => {
-    this.drawer.building.debugDown()
+    this.drawer.building.controlElevator(0, this.drawer.building.elevators[0].goingTo - 1)
   }
 }

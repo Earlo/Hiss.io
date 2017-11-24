@@ -7,6 +7,9 @@ export default class Elevator {
     this.speed = 0.1 //0.05
     this.moving = false
   }
+  setDestination( dest ){
+    this.goingTo = dest
+  }
   move(){
     if (this.level !== this.goingTo){
       const direction = Math.sign(this.goingTo - this.level)
@@ -19,15 +22,6 @@ export default class Elevator {
   }
   getGraphicalHeight(){
     const direction = Math.sign(this.goingTo - this.level)
-    return (this.level+this.inbetween)
+    return (this.level+this.inbetween + 1)
   }
 }
-
-function moveUp(elevator) {
-  elevator.goingTo = elevator.level += 1
-}
-
-function moveDown(elevator) {
-  elevator.goingTo = elevator.level -= 1
-}
-
