@@ -28,6 +28,7 @@ class Elevator {
     this.moving = false
   }
   move(){
+    console.log("moving")
     if (this.level != this.goingTo){
       const direction = Math.sign(this.level - this.goingTo)
       this.inbetween += direction * this.speed
