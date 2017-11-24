@@ -1,3 +1,5 @@
+import * as url from '../public/hissi1.ico';
+
 export class Drawer {
   constructor(canvas, building) {
   	this.canvas = canvas
@@ -13,9 +15,10 @@ export class Drawer {
         drawElevator(abaj.getGraphicalHeight() * this.building.height)
     })
   }
-  drawElevator() {
-  	///DO
-  }
+  drawElevator(height) {
+    var ctx = this.canvas.getContext("2d")
+    ctx.drawImage(url.default,300,height)
+	}
   drawAbaj() {
   	///DO
   }
