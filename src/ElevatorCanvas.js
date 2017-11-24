@@ -7,7 +7,6 @@ export default class ElevatorCanvas extends Component {
   }
 
   render () {
-    console.log(this.context)
     return <div>{ this.context.canvas }</div>
  }
 }
