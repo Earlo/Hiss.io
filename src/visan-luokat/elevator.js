@@ -1,8 +1,8 @@
-class Building {
+export class Building {
   constructor(levels) {
     this.levels = levels
     this.levelHeight = 32
-    this.elevatos = [new Elevator(0, 0) ]
+    this.elevators = [new Elevator(0, 0) ]
     this.abajs = []
   }
 
@@ -29,7 +29,7 @@ class Elevator {
   }
   move(){
     console.log("moving")
-    if (this.level != this.goingTo){
+    if (this.level !== this.goingTo){
       const direction = Math.sign(this.level - this.goingTo)
       this.inbetween += direction * this.speed
       if (this.inbetween > 1){
@@ -54,3 +54,5 @@ function moveDown(elevator) {
   console.log('DOWN')
   elevator.goingTo = elevator.level -= 1
 }
+
+export default {Building, Elevator}

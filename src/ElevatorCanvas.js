@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Controls from './Controls'
-import Building from './visan-luokat/elevator'
+import {Building} from './visan-luokat/elevator'
 
 
 export default class ElevatorCanvas extends Component {
@@ -11,9 +11,10 @@ export default class ElevatorCanvas extends Component {
     </div>
   }
 
-  Componentdidmount () {
+  componentDidMount () {
     const B = new Building(10)
     setInterval(function(){
+      console.log("uliuli")
       B.update()
     },100);
   }
