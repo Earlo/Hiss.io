@@ -36,7 +36,7 @@ function moveUp(elevator) {
   elevator.goingTo = elevator.level += 1
 }
 
-function moveDown() {
+function moveDown(elevator) {
   console.log('DOWN')
   elevator.goingTo = elevator.level -= 1
 }
