@@ -23,6 +23,7 @@ class Elevator {
         this.level += direction
       }
     }
+  }
 }
 
 function moveUp() {
