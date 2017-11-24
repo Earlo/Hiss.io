@@ -33,3 +33,5 @@ body {
     margin: auto auto;
     border:1px solid #000000;
 }
+
+@import 'controls.css';
