@@ -34,7 +34,6 @@ export default class Drawer {
     this.drawElevatorChute()
     this.drawFloors()
     this.building.elevators.forEach((elevator) => {
-        console.log(this.building.levelHeight)
         this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.levelHeight)
     })
     this.building.abajs.forEach((abaj) => {

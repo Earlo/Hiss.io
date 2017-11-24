@@ -15,15 +15,14 @@ export default class ElevatorCanvas extends Component {
     this.drawer = new Drawer(this.canvas)
     setInterval(() => {
       this.drawer.update()
-      //console.log('DRAWER DOES SOMETHING WICKED')
     }, 50)
   }
 
   moveUp = () => {
-    this.drawer.building.debugUp()
+    this.drawer.building.controlElevator(0, this.drawer.building.elevators[0].goingTo + 1)
   }
 
   moveDown = () => {
-    this.drawer.building.debugDown()
+    this.drawer.building.controlElevator(0, this.drawer.building.elevators[0].goingTo - 1)
   }
 }

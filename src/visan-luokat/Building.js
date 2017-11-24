@@ -20,12 +20,9 @@ export default class Building {
     })
   }
 
-  debugUp(){
-    this.elevators[0].goingTo += 1
+  controlElevator(index, floor){
+    if (floor >= 0 && floor < this.levels){
+      this.elevators[index].setDestination(floor)
+    }
   }
-
-  debugDown(){
-    this.elevators[0].goingTo -= 1
-  }
-
 }
