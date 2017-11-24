@@ -27,7 +27,7 @@ body {
     width: 100%;
 }
 
-#game > canvas {
+#hissi-canvas {
 
     display: block;
     margin: auto auto;
