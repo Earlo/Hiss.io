@@ -1,0 +1,10 @@
+button.elevatorControl {
+    font-size: 20px;
+    padding: 5px;
+    background: rgb(141, 153, 221);
+    margin: 5px;
+}
+
+button.elevatorControl > i {
+    margin: 0 5px 0 0;
+}

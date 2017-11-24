@@ -15,8 +15,6 @@ export default class App extends Component {
   render() {
     return (
       <div id="game">
-      <i class="fa fa-camera-retro"></i> fa-camera-retro
-
         <ElevatorCanvas/>
         <Controls/>
       </div>
