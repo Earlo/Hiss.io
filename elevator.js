@@ -10,8 +10,14 @@ class Elevator {
     this.level = level
     this.capacity = capacity
     this.speed = 0.001
+    this.moving = false
   }
   move(to){
-    this.level += this.speed
+    direction = Math.sign( this.level - to)
+    this.level += this.speed*direction
+    if (this.level*direction > to){
+      this.level = to
+      this.moving = false
+    }
   }
 }
