@@ -1,12 +1,12 @@
 export default class Abaj {
-  constructor(level, position, destination) {
-    this.level = level
+  constructor(floor, position, destination) {
+    this.floor = floor
     this.position = position
     this.destination = destination
   }
 
   move() {
-    if(this.level !== this.destination){
+    if(this.floor !== this.destination){
       this.moveTowardsElevator()
     }else{
       this.moveTowardsExit()

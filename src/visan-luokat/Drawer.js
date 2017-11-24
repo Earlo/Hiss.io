@@ -35,7 +35,7 @@ export default class Drawer {
     this.drawElevatorChute()
     this.drawFloors()
     this.building.elevators.forEach((elevator) => {
-        this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.levelHeight)
+        this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
     })
     this.building.abajs.forEach((abaj) => {
         this.drawAbaj(abaj)
@@ -49,7 +49,7 @@ export default class Drawer {
   drawAbaj(abaj) {
     const { context } = this
     context.font="20px Monaco"
-    context.fillText("X", abaj.position, 595 - abaj.level * this.building.levelHeight)
+    context.fillText("X", abaj.position, 595 - abaj.floor * this.building.floorHeight)
   }
 
   drawBuilding(){
@@ -69,8 +69,8 @@ export default class Drawer {
   }
 
   drawFloors() {
-    const floorCount = this.building.levels
-    const floorHeight = this.building.levelHeight
+    const floorCount = this.building.floors
+    const floorHeight = this.building.floorHeight
     const startX = 45
     const endX = 45 + this.building.buildingWidth - 25
     let y

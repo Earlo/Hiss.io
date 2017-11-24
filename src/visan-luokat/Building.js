@@ -2,10 +2,10 @@ import Elevator from './Elevator'
 import Abaj from './Abaj'
 
 export default class Building {
-  constructor(levels) {
-    this.levels = levels
-    this.levelHeight = 32
-    this.buildingHeight = this.levels * this.levelHeight
+  constructor(floors) {
+    this.floors = floors
+    this.floorHeight = 32
+    this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
     this.elevators = [new Elevator(0, 0) ]
     this.abajs = [new Abaj(1,500)]
@@ -21,7 +21,7 @@ export default class Building {
   }
 
   controlElevator(index, floor){
-    if (floor >= 0 && floor < this.levels){
+    if (floor >= 0 && floor < this.floors){
       this.elevators[index].setDestination(floor)
     }
   }
