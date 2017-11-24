@@ -24,24 +24,21 @@ export default class Drawer {
   	this.images = {
         elevatorImg: getImage(elevatorImg)
     }
-    this.abaj = new Abaj(2, 500)
   	this.building = new Building(10)
   }
 
   update = () => {
     this.building.update()
-    this.abaj.move()
     //TODO set variable
     this.context.clearRect(0,0,600,600)
     this.drawBuilding()
     this.drawElevatorChute()
     this.drawFloors()
-    this.drawAbaj()
     this.building.elevators.forEach((elevator) => {
         this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.levelHeight)
     })
     this.building.abajs.forEach((abaj) => {
-        this.drawElevator(this.height - abaj.getGraphicalHeight() * this.building.levelHeight)
+        this.drawAbaj(abaj)
     })
   }
 
@@ -49,8 +46,8 @@ export default class Drawer {
       this.context.drawImage(this.images.elevatorImg, 20, height, 25, 32);
   }
 
-  drawAbaj() {
-    const { context, abaj } = this
+  drawAbaj(abaj) {
+    const { context } = this
     context.font="20px Monaco"
     context.fillText("X", abaj.position, 595 - abaj.level * this.building.levelHeight)
   }

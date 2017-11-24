@@ -1,4 +1,5 @@
 import Elevator from './Elevator'
+import Abaj from './Abaj'
 
 export default class Building {
   constructor(levels) {
@@ -7,8 +8,7 @@ export default class Building {
     this.buildingHeight = this.levels * this.levelHeight
     this.buildingWidth = 500
     this.elevators = [new Elevator(0, 0) ]
-    this.elevators[0].goingTo = 4
-    this.abajs = []
+    this.abajs = [new Abaj(1,500)]
   }
 
   update () {
