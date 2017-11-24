@@ -21,3 +21,11 @@ class Elevator {
     }
   }
 }
+
+function moveUp() {
+  console.log('UP')
+}
+
+function moveDown() {
+  console.log('DOWN')
+}

@@ -6,11 +6,16 @@
     <script src="hissi.js"></script>
     <link rel="stylesheet" 
     type="text/css" href="styles.css"/>
+    <script src="elevator.js"></script>
 </head>
 <body>
 <div id="gameDiv">
     <div id="game">
         <canvas id="hissi-canvas" width="600" height="600"></canvas>
+        <div id="controls">
+            <button onclick="moveUp()" class="elevatorControl">UP</button>
+            <button onclick="moveDown()" class="elevatorControl">DOWN</button>
+        </div>
     </div>
 </div>
 </body>
