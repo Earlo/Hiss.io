@@ -4,7 +4,7 @@ export default class Elevator {
     this.goingTo = level
     this.inbetween = 0.0
     this.capacity = capacity
-    this.speed = 0.05
+    this.speed = 0.1 //0.05
     this.moving = false
   }
   move(){
@@ -13,7 +13,7 @@ export default class Elevator {
     if (this.level !== this.goingTo){
       const direction = Math.sign(this.goingTo - this.level)
       this.inbetween += direction * this.speed
-      if (this.inbetween > 1){
+      if ( Math.abs(this.inbetween) > 1){
         this.inbetween = 0.0
         this.level += direction
       }
@@ -21,7 +21,7 @@ export default class Elevator {
   }
   getGraphicalHeight(){
     const direction = Math.sign(this.goingTo - this.level)
-    return (this.level+direction*this.inbetween)
+    return (this.level+this.inbetween)
   }
 }
 

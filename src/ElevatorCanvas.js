@@ -12,18 +12,18 @@ export default class ElevatorCanvas extends Component {
   }
 
   componentDidMount () {
-    const drawer = new Drawer(this.canvas)
+    this.drawer = new Drawer(this.canvas)
     setInterval(() => {
-      drawer.update()
+      this.drawer.update()
       //console.log('DRAWER DOES SOMETHING WICKED')
     }, 50)
   }
 
   moveUp = () => {
-    console.log('Up')
+    this.drawer.building.debugUp()
   }
 
   moveDown = () => {
-    console.log('Down')
+    this.drawer.building.debugDown()
   }
 }
