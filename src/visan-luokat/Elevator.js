@@ -21,7 +21,6 @@ export default class Elevator {
     }
   }
   getGraphicalHeight(){
-    const direction = Math.sign(this.goingTo - this.level)
     return (this.level+this.inbetween + 1)
   }
 }
