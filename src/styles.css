@@ -11,13 +11,13 @@ body {
     width: 100%;
 }
 
-#game > #controls{
+#controls{
     margin-top: 5px;
     display: flex;
     justify-content: center;
 }
 
-#controls > .elevatorControl{
+.elevatorControl{
     font-size: 30px;
 }
 
