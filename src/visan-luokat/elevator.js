@@ -3,6 +3,7 @@ export class Building {
     this.levels = levels
     this.levelHeight = 32
     this.elevators = [new Elevator(0, 0) ]
+    this.elevators[0].goingTo = 2
     this.abajs = []
   }
 
@@ -23,13 +24,14 @@ class Elevator {
     this.goingTo = level
     this.inbetween = 0.0
     this.capacity = capacity
-    this.speed = 0.001
+    this.speed = 0.1
     this.moving = false
   }
   move(){
     console.log("moving")
+    console.log("inbetween",this.inbetween)
     if (this.level !== this.goingTo){
-      const direction = Math.sign(this.level - this.goingTo)
+      const direction = Math.sign(this.goingTo - this.level)
       this.inbetween += direction * this.speed
       if (this.inbetween > 1){
         this.inbetween = 0.0
@@ -41,7 +43,6 @@ class Elevator {
     const direction = Math.sign(this.level - this.goingTo)
     return building.levelHeight*(this.level+this.direction*this.inbetween)
   }
-
 }
 
 function moveUp(elevator) {
