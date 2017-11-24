@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Controls from './Controls'
-import {Building} from './visan-luokat/elevator'
+import { Building } from './visan-luokat/elevator'
 
 
 export default class ElevatorCanvas extends Component {

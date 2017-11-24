@@ -55,4 +55,3 @@ function moveDown(elevator) {
   elevator.goingTo = elevator.level -= 1
 }
 
-export default Building
