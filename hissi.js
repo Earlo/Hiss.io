@@ -7,23 +7,7 @@ const ctx = canvas.getContext("2d")
 
 
 
-class Building {
-  constructor(levels) {
-    this.levels = levels
-  }
-}
 
-
-class Elevator {
-  constructor(level, capacity) {
-    this.level = level
-    this.capacity = capacity
-    this.speed = 0.001
-  }
-  move(to){
-  	this.level += this.speed
-  }
-}
 
 //const gfx0 = document.getElementById("effect0").getContext("2d")
 //const ctxUi = document.getElementById("ctx-ui").getContext("2d")
