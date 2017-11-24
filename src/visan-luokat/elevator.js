@@ -2,7 +2,7 @@ class Building {
   constructor(levels) {
     this.levels = levels
     this.levelHeight = 32
-    this.elevatos = [new Elevator(0, 0) ]
+    this.elevators = [new Elevator(0, 0) ]
     this.abajs = []
   }
 
@@ -13,7 +13,6 @@ class Building {
     this.abajs.forEach(function(abaj) {
         abaj.move();
     })
-
   }
 }
 
@@ -54,3 +53,5 @@ function moveDown(elevator) {
   console.log('DOWN')
   elevator.goingTo = elevator.level -= 1
 }
+
+export default Building
