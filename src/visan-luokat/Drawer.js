@@ -6,26 +6,27 @@ import Abaj from './Abaj'
 export default class Drawer {
   constructor(canvas) {
   	this.canvas = canvas
+    this.context = this.canvas.getContext("2d")
+
   	this.building = new Building(10)
   }
 
   update = () => {
+    this.building.update()
+    //TODO set variable
+    this.context.clearRect(0,0,600,600)
     this.building.elevators.forEach((elevator) => {
-        this.drawElevator(elevator.getGraphicalHeight() * this.building.height)
+        console.log(this.building.levelHeight)
+        this.drawElevator(elevator.getGraphicalHeight() * this.building.levelHeight)
     })
     this.building.abajs.forEach((abaj) => {
-        this.drawElevator(abaj.getGraphicalHeight() * this.building.height)
+        this.drawElevator(abaj.getGraphicalHeight() * this.building.levelHeight)
     })
   }
 
   drawElevator = (height) => {
-    console.log(height)
-    var ctx = this.canvas.getContext("2d")
-    console.log(ctx)
-    ctx.strokeStyle = "#FF0000"
-
-    ctx.fillRect(300,10,20,20);
-    ctx.stroke(); 
+    this.context.fillRect(300,height,20,20);
+    this.context.stroke(); 
     //ctx.drawImage(url.default,300,height)
   }
   drawAbaj() {

@@ -5,7 +5,7 @@ export default class Building {
     this.levels = levels
     this.levelHeight = 32
     this.elevators = [new Elevator(0, 0) ]
-    this.elevators[0].goingTo = 2
+    this.elevators[0].goingTo = 20
     this.abajs = []
   }
 

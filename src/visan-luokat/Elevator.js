@@ -21,7 +21,8 @@ export default class Elevator {
   }
   getGraphicalHeight(){
     const direction = Math.sign(this.level - this.goingTo)
-    return (this.level+this.direction*this.inbetween)
+    console.log("dir",this.level,direction,this.inbetween)
+    return (this.level+direction*this.inbetween)
   }
 }
 
