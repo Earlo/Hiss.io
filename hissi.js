@@ -31,12 +31,6 @@ class Elevator {
 //gfx0.fillStyle = 'rgb(0,0,255)'
 ctx.fillStyle = 'rgb(0,0,127)'
 
-setWAVETYPE = function(i){
-	currentFunction = waveTypes[i]
-}
-
 setInterval(function(){
 	ctx.fillRect(0,0,WIDTH,HEIGHT)
-	//gfx0.clearRect(0,0,WIDTH,HEIGHT)
-
 },1)
