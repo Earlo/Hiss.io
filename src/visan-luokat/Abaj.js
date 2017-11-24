@@ -6,6 +6,6 @@ class Abaj {
     this.destination = destination
   }
   move() {
-  	console.log("doing")
+  	console.log("moving abaj")
   }
 }

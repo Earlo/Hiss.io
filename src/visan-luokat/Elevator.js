@@ -8,8 +8,6 @@ export default class Elevator {
     this.moving = false
   }
   move(){
-    console.log("moving")
-    console.log("inbetween",this.inbetween)
     if (this.level !== this.goingTo){
       const direction = Math.sign(this.goingTo - this.level)
       this.inbetween += direction * this.speed
@@ -26,12 +24,10 @@ export default class Elevator {
 }
 
 function moveUp(elevator) {
-  console.log('UP')
   elevator.goingTo = elevator.level += 1
 }
 
 function moveDown(elevator) {
-  console.log('DOWN')
   elevator.goingTo = elevator.level -= 1
 }
 
