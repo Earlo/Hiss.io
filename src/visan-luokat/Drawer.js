@@ -9,17 +9,19 @@ export default class Drawer {
     this.width = canvas.width
     this.height = canvas.height
     this.context = this.canvas.getContext("2d")
-
+    this.abaj = new Abaj(2, 500)
   	this.building = new Building(10)
   }
 
   update = () => {
     this.building.update()
+    this.abaj.move()
     //TODO set variable
     this.context.clearRect(0,0,600,600)
     this.drawBuilding()
     this.drawElevatorChute()
     this.drawFloors()
+    this.drawAbaj()
     this.building.elevators.forEach((elevator) => {
         this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.levelHeight)
     })
@@ -33,8 +35,11 @@ export default class Drawer {
     this.context.stroke(); 
     //ctx.drawImage(url.default,300,height)
   }
+
   drawAbaj() {
-    ///DO
+    const { context, abaj } = this
+    context.font="20px Monaco"
+    context.fillText("X", abaj.position, 595 - abaj.level * this.building.levelHeight)
   }
 
   drawBuilding(){

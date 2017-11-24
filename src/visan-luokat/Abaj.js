@@ -1,11 +1,12 @@
-class Abaj {
-  constructor(weight, level, position, destination) {
-    this.weight = weight
+export default class Abaj {
+  constructor(level, position) {
     this.level = level
     this.position = position
-    this.destination = destination
   }
+
   move() {
-  	console.log("moving abaj")
+    if(this.position > 30){
+      this.position -= 1
+    }
   }
 }
