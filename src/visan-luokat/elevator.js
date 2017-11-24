@@ -1,4 +1,4 @@
-class Building {
+export class Building {
   constructor(levels) {
     this.levels = levels
     this.levelHeight = 32
@@ -53,5 +53,3 @@ function moveDown(elevator) {
   console.log('DOWN')
   elevator.goingTo = elevator.level -= 1
 }
-
-export default Building
