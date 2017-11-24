@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import Controls from './Controls'
+import ElevatorCanvas from './ElevatorCanvas'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-       <Controls/>
+        <ElevatorCanvas/>
+        <Controls/>
       </div>
-    );
+    )
   }
 }
-
-export default App;
