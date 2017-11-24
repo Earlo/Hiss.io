@@ -1,7 +1,16 @@
 import Building from './Building'
+import React from 'react';
 import Abaj from './Abaj'
+import elevatorImg from '../assets/elevator.png'
 
 //import * as url from '../../public/hissi1.ico';
+
+
+const getImage = (url) => {
+    const myImage = new Image();
+    myImage.src = url;
+    return myImage;
+}
 
 export default class Drawer {
   constructor(canvas) {
@@ -9,7 +18,12 @@ export default class Drawer {
     this.width = canvas.width
     this.height = canvas.height
     this.context = this.canvas.getContext("2d")
+  	this.building = new Building(10);
 
+  	//initializing image assets
+  	this.images = {
+        elevatorImg: getImage(elevatorImg)
+    }
   	this.building = new Building(10)
   }
 
@@ -24,17 +38,18 @@ export default class Drawer {
         this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.levelHeight)
     })
     this.building.abajs.forEach((abaj) => {
-        this.drawElevator(this.height - abaj.getGraphicalHeight() * this.building.levelHeight)
+        this.drawAbaj(abaj)
     })
   }
 
   drawElevator = (height) => {
-    this.context.fillRect(23,height,20,32);
-    this.context.stroke(); 
-    //ctx.drawImage(url.default,300,height)
+      this.context.drawImage(this.images.elevatorImg, 20, height, 25, 32);
   }
-  drawAbaj() {
-    ///DO
+
+  drawAbaj(abaj) {
+    const { context } = this
+    context.font="20px Monaco"
+    context.fillText("X", abaj.position, 595 - abaj.level * this.building.levelHeight)
   }
 
   drawBuilding(){

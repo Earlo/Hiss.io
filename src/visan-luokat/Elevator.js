@@ -1,6 +1,6 @@
 export default class Elevator {
   constructor(level, capacity) {
-    this.level = level
+    this.level = 0
     this.goingTo = level
     this.inbetween = 0.0
     this.capacity = capacity
