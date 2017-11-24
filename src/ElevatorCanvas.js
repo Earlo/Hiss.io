@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Controls from './Controls'
-import { Building } from './visan-luokat/elevator'
+import Drawer from './visan-luokat/Drawer'
 
 
 export default class ElevatorCanvas extends Component {
@@ -12,9 +12,9 @@ export default class ElevatorCanvas extends Component {
   }
 
   componentDidMount () {
-    const building = new Building(3)
+    const drawer = new Drawer(this.canvas)
     setInterval(() => {
-      building.update()
+      console.log('DRAWER DOES SOMETHING WICKED')
     }, 500)
   }
 
