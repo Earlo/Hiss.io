@@ -5,5 +5,7 @@ class Abaj {
     this.position = position
     this.destination = destination
   }
-  
+  move() {
+  	console.log("doing")
+  }
 }
