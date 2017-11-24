@@ -6,6 +6,8 @@ import Abaj from './Abaj'
 export default class Drawer {
   constructor(canvas) {
   	this.canvas = canvas
+    this.width = canvas.width
+    this.height = canvas.height
     this.context = this.canvas.getContext("2d")
 
   	this.building = new Building(10)
@@ -17,10 +19,10 @@ export default class Drawer {
     this.context.clearRect(0,0,600,600)
     this.building.elevators.forEach((elevator) => {
         console.log(this.building.levelHeight)
-        this.drawElevator(elevator.getGraphicalHeight() * this.building.levelHeight)
+        this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.levelHeight)
     })
     this.building.abajs.forEach((abaj) => {
-        this.drawElevator(abaj.getGraphicalHeight() * this.building.levelHeight)
+        this.drawElevator(this.height - abaj.getGraphicalHeight() * this.building.levelHeight)
     })
   }
 

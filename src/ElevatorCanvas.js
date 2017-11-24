@@ -16,7 +16,7 @@ export default class ElevatorCanvas extends Component {
     setInterval(() => {
       drawer.update()
       //console.log('DRAWER DOES SOMETHING WICKED')
-    }, 100)
+    }, 50)
   }
 
   moveUp = () => {
