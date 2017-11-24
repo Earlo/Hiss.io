@@ -13,7 +13,6 @@ export class Building {
     this.abajs.forEach(function(abaj) {
         abaj.move();
     })
-
   }
 }
 
@@ -55,4 +54,4 @@ function moveDown(elevator) {
   elevator.goingTo = elevator.level -= 1
 }
 
-export default {Building, Elevator}
+export default Building

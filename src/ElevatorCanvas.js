@@ -12,11 +12,10 @@ export default class ElevatorCanvas extends Component {
   }
 
   componentDidMount () {
-    const B = new Building(10)
-    setInterval(function(){
-      console.log("uliuli")
-      B.update()
-    },100);
+    const building = new Building(3)
+    setInterval(() => {
+      building.update()
+    }, 500)
   }
 
   moveUp = () => {
