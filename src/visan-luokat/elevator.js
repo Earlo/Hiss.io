@@ -39,9 +39,9 @@ class Elevator {
       }
     }
   }
-  getGraphicalHeight(building){
+  getGraphicalHeight(){
     const direction = Math.sign(this.level - this.goingTo)
-    return building.levelHeight*(this.level+this.direction*this.inbetween)
+    return (this.level+this.direction*this.inbetween)
   }
 }
 
