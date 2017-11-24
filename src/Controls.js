@@ -11,8 +11,8 @@ export default class Controls extends Component {
     const { moveUp, moveDown } = this.props
    return (
      <div id="controls">
-       <button onClick={moveUp} className="elevatorControl"><i class="fa fa-arrow-up"></i>up</button>
-       <button onClick={moveDown} className="elevatorControl"><i class="fa fa-arrow-down"></i>down</button>
+       <button onClick={moveUp} className="elevatorControl"><i className="fa fa-arrow-up"/>up</button>
+       <button onClick={moveDown} className="elevatorControl"><i className="fa fa-arrow-down"/>down</button>
      </div>
    )
  }
