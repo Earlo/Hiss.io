@@ -5,7 +5,15 @@ export default class ElevatorCanvas extends Component {
   render () {
     return <div>
       <canvas id="hissi-canvas" width="600" height="600"/>
-      <Controls/>
+      <Controls moveUp={this.moveUp} moveDown={this.moveDown}/>
     </div>
+  }
+
+  moveUp = () => {
+    console.log('Up')
+  }
+
+  moveDown = () => {
+    console.log('Down')
   }
 }
