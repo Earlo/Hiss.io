@@ -5,4 +5,5 @@ class Abaj {
     this.position = position
     this.destination = destination
   }
+  
 }

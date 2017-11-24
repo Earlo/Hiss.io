@@ -1,6 +1,7 @@
 class Building {
   constructor(levels) {
     this.levels = levels
+    this.levelHeight = 32
   }
 }
 
@@ -23,6 +24,10 @@ class Elevator {
         this.level += direction
       }
     }
+  }
+  getGraphicalHeight(building){
+    const direction = Math.sign(this.level - this.goingTo)
+    return building.levelHeight*(this.level+this.direction*this.inbetween)
   }
 }
 
