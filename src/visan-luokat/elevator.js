@@ -31,10 +31,12 @@ class Elevator {
   }
 }
 
-function moveUp() {
+function moveUp(elevator) {
   console.log('UP')
+  elevator.goingTo = elevator.level += 1
 }
 
 function moveDown() {
   console.log('DOWN')
+  elevator.goingTo = elevator.level -= 1
 }
