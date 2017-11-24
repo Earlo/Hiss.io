@@ -1,9 +1,10 @@
-import * as url from '../public/hissi1.ico';
+import Building from './Building'
+import Abaj from './Abaj'
 
-export class Drawer {
-  constructor(canvas, building) {
+export default class Drawer {
+  constructor(canvas) {
   	this.canvas = canvas
-  	this.building = building
+  	this.building = new Building(0)
   }
 
   update() {
@@ -18,9 +19,9 @@ export class Drawer {
   drawElevator(height) {
     var ctx = this.canvas.getContext("2d")
     ctx.drawImage(url.default,300,height)
-	}
+  }
   drawAbaj() {
-  	///DO
+    ///DO
   }
 
 }
