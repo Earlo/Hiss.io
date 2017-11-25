@@ -11,7 +11,7 @@ export default class Elevator {
     this.goingTo = floor
     this.inbetween = 0.0
     this.passengers  = []
-    this.direction = "UP" //"DOWN"
+    this.direction = 1
     this.speed = 0.1 //0.05
     this.moving = false
     this.floorsToVisit = []
@@ -25,12 +25,12 @@ export default class Elevator {
   }
   move(){
     if (this.floorsToVisit.length){
-      this.goingTo = this.floorsToVisit[0]
-      const direction = Math.sign(this.goingTo - this.floor)
-      this.inbetween += direction * this.speed
+      this.goingTo = this.getNextFloor()
+      this.direction = Math.sign(this.goingTo - this.floor)
+      this.inbetween += this.direction * this.speed
       if ( Math.abs(this.inbetween) > 1){
         this.inbetween = 0.0
-        this.setFloor(this.floor + direction)
+        this.setFloor(this.floor + this.direction)
       }
     }
   }
@@ -51,5 +51,13 @@ export default class Elevator {
 
   getGraphicalHeight(){
     return (this.floor+this.inbetween + 1)
+  }
+
+  getNextFloor(){
+    if(this.direction === 1){
+      return this.floorsToVisit.sort()[this.floorsToVisit.length - 1]
+    } else {
+      return this.floorsToVisit.sort()[0]
+    }
   }
 }

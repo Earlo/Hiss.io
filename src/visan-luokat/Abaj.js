@@ -46,7 +46,6 @@ export default class Abaj {
   }
 
   moveToElevator( elevator ){
-    console.log("moving")
     if ( Math.abs(this.position - elevator.xPos) > this.speed){
       if( this.position < elevator.xPos ){
         this.position += this.speed
