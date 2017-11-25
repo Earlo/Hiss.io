@@ -14,10 +14,9 @@ export default class Sensor {
   update(){
  	this.count = 0
   	this.building.abajs.forEach((abaj) => {
-    	if (abaj.floor == this.floor && abaj.destination[0] !== this.floor && Math.abs( abaj.position - this.position ) < 80){
+    	if (abaj.floor == this.floor && abaj.destination[0] !== this.floor ){
     		this.count +=1
     	}
 	});
-
   }
 }

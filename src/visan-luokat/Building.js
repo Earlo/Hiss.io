@@ -9,17 +9,18 @@ export default class Building {
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
 
+    this.sensors = []    
+    this.abajs = []
     this.elevators = []    
     this.elevatorMap = {}
+
     for (var i = 0; i < this.floors; i++) {
       this.elevatorMap[i]=[];
+      new Sensor(i, 420, this)
     } 
     new Elevator(0, 20, 1, this)
+    new Elevator(0, 60, 1, this)
 
-    this.abajs = []
-    this.sensors = []    
-    new Sensor(0, 120, this)
-    new Sensor(3, 120, this)
 
     this.elevatorZone = [20,50]
   }
@@ -41,6 +42,10 @@ export default class Building {
     this.elevators[index].setDestination(floor)
   }
 
+  findClosestFree(to){
+
+  }
+  
   addAbaj(){
     const startFloor = valueBetween(0,this.floors)
     const destination = [valueBetween(0,this.floors), valueBetween(100,400)]
