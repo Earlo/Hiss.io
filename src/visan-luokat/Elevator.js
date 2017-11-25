@@ -5,7 +5,7 @@ export default class Elevator {
     this.capacity = capacity
     this.building = building
     this.building.elevators.push(this)
-    this.setFloor( this.floor )
+
 
     this.floorCount = this.building.floors
     this.goingTo = floor
@@ -14,14 +14,18 @@ export default class Elevator {
     this.direction = "UP" //"DOWN"
     this.speed = 0.1 //0.05
     this.moving = false
+    this.floorsToVisit = []
+    this.setFloor( this.floor )
   }
   setDestination( dest ){
     if (dest >= 0 && dest < this.floorCount){
-      this.goingTo = dest
+      let index = this.floorsToVisit.indexOf(dest) === -1
+      if(index) this.floorsToVisit.push(dest)
     }
   }
   move(){
-    if (this.floor !== this.goingTo){
+    if (this.floorsToVisit.length){
+      this.goingTo = this.floorsToVisit[0]
       const direction = Math.sign(this.goingTo - this.floor)
       this.inbetween += direction * this.speed
       if ( Math.abs(this.inbetween) > 1){
@@ -32,11 +36,15 @@ export default class Elevator {
   }
   setFloor( floor ){
     let i = this.building.elevatorMap[this.floor].indexOf(this)
-    console.log(i)
     if (i !== -1){
       this.building.elevatorMap[this.floor].splice(i, 1);
     }
+    if(this.floorsToVisit.length){
+      let index = this.floorsToVisit.indexOf(floor)
+      if(index !== -1) this.floorsToVisit.splice(index, 1)
+    }
     this.floor = floor
+
     this.building.elevatorMap[this.floor].push(this)
 
   }
