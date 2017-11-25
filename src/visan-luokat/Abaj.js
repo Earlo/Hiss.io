@@ -46,6 +46,7 @@ export default class Abaj {
   }
 
   moveToElevator( elevator ){
+    console.log("moving")
     if ( Math.abs(this.position - elevator.xPos) > this.speed){
       if( this.position < elevator.xPos ){
         this.position += this.speed
@@ -78,13 +79,11 @@ export default class Abaj {
   }
 
   useElevator( building ){
-    building.elevators.forEach((elevator)=>{
-      if( (elevator.floor === this.floor) ){
-        //console.log(this)
-        this.moveToElevator( elevator )
-      } else {
-        elevator.setDestination(this.floor)
-      }
-    })
+    if (building.elevatorMap[this.floor].length > 0){
+      this.moveToElevator( building.elevatorMap[this.floor][0] )
+    } 
+    else{
+      building.elevators[0].setDestination(this.floor)
+    }
   }
 }

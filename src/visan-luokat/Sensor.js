@@ -13,6 +13,6 @@ class Sensor {
 
   }
   move() {
-  	console.log("moving abaj")
+	console.log("moving abaj")
   }
 }
