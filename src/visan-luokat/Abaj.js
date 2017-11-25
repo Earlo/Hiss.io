@@ -67,7 +67,6 @@ export default class Abaj {
         } else {
           this.waitTime = 0
         }
-        console.log(this.waitTime)
         this.position = elevator.xPos
         elevator.passengers.push(this)
         this.elevator = elevator
