@@ -73,10 +73,8 @@ export default class Abaj {
       }
     }
     else{
-      
-      this.destination[0] = Math.floor((Math.random() * building.floors)); 
-      //const index = building.abajs.indexOf(this)
-      //building.abajs.splice(index,1)
+      const index = building.abajs.indexOf(this)
+      building.abajs.splice(index,1)
     }
   }
 
