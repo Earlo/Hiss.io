@@ -101,9 +101,9 @@ export default class Drawer {
     let abajsCount = this.building.abajsCount
     if(waitTime){
       let formattedWaitTime = Math.round(waitTime / abajsCount / 1000 * 100) / 100
-      const waitTimeString = `${formattedWaitTime} s`
+      const waitTimeString = `Average time spent waiting for elevator: ${formattedWaitTime} s`
       this.context.font="20px Monaco"
-      this.context.fillText(waitTimeString, 300,100)
+      this.context.fillText(waitTimeString, 100,100)
     }
   }
 }
