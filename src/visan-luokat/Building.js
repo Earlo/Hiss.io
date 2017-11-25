@@ -9,9 +9,8 @@ export default class Building {
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
 
-    this.sensors = []    
+    this.sensors = []
     this.abajs = []
-    this.elevators = []    
     this.elevators = []
     this.elevatorMap = {}
 
@@ -63,7 +62,7 @@ export default class Building {
         return r
       }
 
-    } 
+    }
   }
 
   addAbaj(){

@@ -27,10 +27,10 @@ export default class Drawer {
     //TODO set variable
     this.context.clearRect(0,0,600,600)
     this.drawBuilding()
-    this.drawElevatorChute()
     this.drawFloors()
     this.building.elevators.forEach((elevator) => {
-        this.drawElevator(elevator.xPos, this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
+        this.drawElevatorChute(elevator.xPos)
+        this.drawElevator(elevator.xPos - 1, this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
     })
     this.building.abajs.forEach((abaj) => {
         this.drawAbaj(abaj)
@@ -52,7 +52,7 @@ export default class Drawer {
       context.fillText("O", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
     }
     else{
-      context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)      
+      context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
     }
   }
 
@@ -70,19 +70,19 @@ export default class Drawer {
     this.context.stroke();
   }
 
-  drawElevatorChute() {
+  drawElevatorChute(x) {
     const width = 24
     const height = this.building.buildingHeight
     this.context.strokeStyle = "#000"
-    this.context.strokeRect(21, 600 - height,width,height)
+    this.context.strokeRect(x, 600 - height,width,height)
     this.context.stroke();
   }
 
   drawFloors() {
     const floorCount = this.building.floors
     const floorHeight = this.building.floorHeight
-    const startX = 45
-    const endX = 45 + this.building.buildingWidth - 25
+    const startX = 85
+    const endX = startX + this.building.buildingWidth - 65
     let y
     const { context } = this
     for(let i = 1; i < floorCount; i++){
