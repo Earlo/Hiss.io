@@ -13,7 +13,6 @@ export default class Elevator {
     this.passengers  = []
     this.direction = 1
     this.speed = 0.1 //0.05
-    this.moving = false
     this.floorsToVisit = []
     this.setFloor( this.floor )
   }
@@ -23,8 +22,11 @@ export default class Elevator {
       if(index) this.floorsToVisit.push(dest)
     }
   }
+  moving(){
+    return this.floorsToVisit.length !== 0
+  }
   move(){
-    if (this.floorsToVisit.length){
+    if (this.floorsToVisit.length > 0){
       this.goingTo = this.getNextFloor()
       this.direction = Math.sign(this.goingTo - this.floor)
       this.inbetween += this.direction * this.speed

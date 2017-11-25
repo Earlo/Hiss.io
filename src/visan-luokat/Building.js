@@ -9,19 +9,20 @@ export default class Building {
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
 
+    this.sensors = []    
+    this.abajs = []
+    this.elevators = []    
     this.elevators = []
     this.elevatorMap = {}
+
     for (var i = 0; i < this.floors; i++) {
       this.elevatorMap[i]=[];
+      new Sensor(i, 420, this)
+
     }
     new Elevator(0, 20, 1, this)
-
-    this.abajs = []
-    this.sensors = []
-    new Sensor(0, 120, this)
-    new Sensor(3, 120, this)
-
-    this.elevatorZone = [20,50]
+    new Elevator(0, 60, 1, this)
+    this.elevatorZone = [20,80]
   }
 
   update () {
@@ -39,6 +40,30 @@ export default class Building {
 
   controlElevator(index, floor){
     this.elevators[index].setDestination(floor)
+  }
+
+  findFreeIn(floor){
+    if (floor >= 0 && floor < this.floors){
+      for (var i = 0; i < this.elevatorMap[floor].length; i++) {
+        if (!this.elevatorMap[floor][i].moving()){
+          return this.elevatorMap[floor][i]
+        }
+      }
+    }
+    return null
+  }
+  findClosestFree(to){
+    for (var d = 0; d < this.floors; d++) {
+      var r = this.findFreeIn( to + d )
+      if (r !== null){
+        return r
+      }
+      r = this.findFreeIn( to - d )
+      if (r !== null){
+        return r
+      }
+
+    } 
   }
 
   addAbaj(){

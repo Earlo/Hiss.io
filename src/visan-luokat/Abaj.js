@@ -33,7 +33,6 @@ export default class Abaj {
   }
 
   moveTowardsElevator( building ){
-    //console.log("ddo",this.position, building.elevatorZone)
   	if( this.position < building.elevatorZone[0] ){
   		this.position += this.speed
   	}
@@ -72,6 +71,8 @@ export default class Abaj {
       }
     }
     else{
+      
+      //this.destination[0] = Math.floor((Math.random() * building.floors)); 
       const index = building.abajs.indexOf(this)
       building.abajs.splice(index,1)
     }
@@ -82,7 +83,11 @@ export default class Abaj {
       this.moveToElevator( building.elevatorMap[this.floor][0] )
     } 
     else{
-      building.elevators[0].setDestination(this.floor)
+      var closests = building.findClosestFree( this.floor )
+      console.log(closests)
+      if(closests){
+        closests.setDestination(this.floor)
+      }
     }
   }
 }
