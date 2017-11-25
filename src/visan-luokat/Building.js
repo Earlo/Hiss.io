@@ -7,8 +7,15 @@ export default class Building {
     this.floorHeight = 32
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
-    this.elevators = [new Elevator(0, 20, 1) ]
-    this.abajs = [new Abaj(0,500,[1,500])]
+
+    this.elevators = []    
+    this.elevatorMap = {}
+    for (var i = 0; i < this.floors; i++) {
+      this.elevatorMap[i]=[];
+    } 
+    new Elevator(0, 20, 1, this)
+
+    this.abajs = [new Abaj(0,500,[1,200])]
     this.elevatorZone = [20,50]
   }
 
@@ -22,8 +29,6 @@ export default class Building {
   }
 
   controlElevator(index, floor){
-    if (floor >= 0 && floor < this.floors){
-      this.elevators[index].setDestination(floor)
-    }
+    this.elevators[index].setDestination(floor)
   }
 }
