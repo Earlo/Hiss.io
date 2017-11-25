@@ -1,10 +1,10 @@
 import Building from './Building'
 import elevatorImg from '../assets/elevator.png'
-import abajBody from '../assets/abaj/body_side.png';
-import abajCloserArm from '../assets/abaj/closer_arm.png';
-import abajFarArm from '../assets/abaj/far_arm.png';
-import abajCloserLeg from '../assets/abaj/leg_closer.png';
-import abajFarLeg from '../assets/abaj/leg_far.png';
+import abajBody from '../assets/abaj/basic/body_side.png';
+import abajCloserArm from '../assets/abaj/basic/closer_arm.png';
+import abajFarArm from '../assets/abaj/basic/far_arm.png';
+import abajCloserLeg from '../assets/abaj/basic/leg_closer.png';
+import abajFarLeg from '../assets/abaj/basic/leg_far.png';
 
 import elevatorRope from '../assets/hissi/elevator_rope.png';
 
