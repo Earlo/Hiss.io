@@ -26,7 +26,11 @@ export default class Abaj {
         this.floor = this.elevator.floor
       }
     }else{
-      this.elevator = null
+      if(this.elevator){
+        const index = this.elevator.passengers.indexOf(this)
+        this.elevator.passengers.splice(index,1)
+        this.elevator = null
+      }
       this.moveTowardsExit(building)
     }
 
@@ -54,9 +58,12 @@ export default class Abaj {
       }
     }
     else{
-      this.position = elevator.xPos
-      this.elevator = elevator
-      this.elevator.setDestination( this.destination[0] )
+      if(!elevator.isFull()){
+        this.position = elevator.xPos
+        elevator.passengers.push(this)
+        this.elevator = elevator
+        this.elevator.setDestination( this.destination[0] )
+      }
     }
   }
 
@@ -71,7 +78,6 @@ export default class Abaj {
       }
     }
     else{
-      
       //this.destination[0] = Math.floor((Math.random() * building.floors)); 
       const index = building.abajs.indexOf(this)
       building.abajs.splice(index,1)
@@ -80,7 +86,8 @@ export default class Abaj {
 
   useElevator( building ){
     if (building.elevatorMap[this.floor].length > 0){
-      this.moveToElevator( building.elevatorMap[this.floor][0] )
+      const elevator = building.elevatorMap[this.floor][0]
+      this.moveToElevator( elevator )
     } 
     else{
       let closestElevator = building.findClosestFreeElevator( this.floor )

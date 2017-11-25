@@ -22,9 +22,15 @@ export default class Elevator {
       if(index) this.floorsToVisit.push(dest)
     }
   }
-  moving(){
-    return this.floorsToVisit.length !== 0
+
+  isFull(){
+    return this.passengers.length === this.capacity
   }
+
+  notMoving(){
+    return this.floorsToVisit.length === 0
+  }
+
   move(){
     if (this.floorsToVisit.length > 0){
       this.goingTo = this.getNextFloor()
