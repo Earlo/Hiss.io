@@ -1,7 +1,8 @@
 export default class Elevator {
   constructor(floor, xPos, capacity, building) {
+    const offset = building.type === 'smart'? 0: 600
     this.floor = floor
-    this.xPos = xPos
+    this.xPos = xPos + offset
     this.capacity = capacity
     this.building = building
     this.building.elevators.push(this)
