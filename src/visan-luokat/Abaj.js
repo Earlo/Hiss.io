@@ -83,10 +83,10 @@ export default class Abaj {
       this.moveToElevator( building.elevatorMap[this.floor][0] )
     } 
     else{
-      var closests = building.findClosestFree( this.floor )
-      console.log(closests)
-      if(closests){
-        closests.setDestination(this.floor)
+      var closestElevator = building.findClosestFreeElevator( this.floor )
+      console.log(closestElevator)
+      if(closestElevator){
+        closestElevator.setDestination(this.floor)
       }
     }
   }
