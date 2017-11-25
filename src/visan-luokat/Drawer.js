@@ -47,12 +47,12 @@ export default class Drawer {
   }
 
   drawElevator = (xPos, yPos ) => {
-    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, 32);
+    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, this.building.floorHeight);
   }
 
   drawAbaj(abaj) {
     const { context } = this
-    context.font="20px Monaco"
+    context.font="30px Monaco"
     context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
   }
 

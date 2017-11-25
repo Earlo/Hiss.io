@@ -5,7 +5,7 @@ import Sensor from './Sensor'
 export default class Building {
   constructor(floors) {
     this.floors = floors
-    this.floorHeight = 32
+    this.floorHeight = 40
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
 
