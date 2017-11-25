@@ -6,6 +6,9 @@ import abajFarArm from '../assets/abaj/far_arm.png';
 import abajCloserLeg from '../assets/abaj/leg_closer.png';
 import abajFarLeg from '../assets/abaj/leg_far.png';
 
+import elevatorRope from '../assets/hissi/elevator_rope.png';
+
+
 
 const getImage = (url) => {
     const myImage = new Image();
@@ -25,6 +28,7 @@ export default class Drawer {
   	//initializing image assets
   	this.images = {
         elevatorImg: getImage(elevatorImg),
+        elevatorRope: getImage(elevatorRope),
         abaj: {
           body: getImage(abajBody),
           closerLeg: getImage(abajCloserLeg),
@@ -57,7 +61,13 @@ export default class Drawer {
   }
 
   drawElevator = (xPos, yPos ) => {
-    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, this.building.floorHeight);
+    this.context.fillStyle = "red"
+    const height = this.building.buildingHeight
+    this.context.fillRect(xPos + 10, 600 - height, 3, 3)
+
+    this.context.drawImage(this.images.elevatorRope, xPos + 10, 600 - height, this.images.elevatorRope.width, yPos - 600 + height)
+
+    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, this.building.floorHeight)
   }
 
 
@@ -97,9 +107,10 @@ export default class Drawer {
 
     const { body, closerLeg, farLeg, closerArm, farArm } = this.images.abaj
       const isMirrored = abaj.floor === abaj.destination[0];
-      const x = abaj.position+6
-      const y = this.height - abaj.getGraphicalHeight() * this.building.floorHeight - 18 + 3
+      let x = abaj.position+6
+      let y = this.height - abaj.getGraphicalHeight() * this.building.floorHeight - 18 + 3
     if (abaj.elevator || abaj.isIdling){
+        x += 5;
         this.drawImageRotation(context, farArm, x-3, y-10, x+1, y-7, 0.3, 0.1);
 
         this.drawImageRotation(context, farLeg, x-2, y, x+4-2, y+3, 6, -0.7);
