@@ -125,10 +125,10 @@ export default class Abaj {
       this.moveToElevator( building.elevatorMap[this.floor][0] )
     } 
     else{
-      let closestElevator = building.findClosestFreeElevator( this.floor )
-      if(closestElevator){
-        closestElevator.setDestination(this.floor)
-      }
+      //let closestElevator = building.findClosestFreeElevator( this.floor )
+      //if(closestElevator){
+      //  closestElevator.setDestination(this.floor)
+      //}
       if(!this.waitStartTime) this.waitStartTime = new Date().getTime()
     }
   }

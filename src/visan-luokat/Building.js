@@ -48,7 +48,8 @@ export default class Building {
 
   findClosestFreeElevator(to){
     const doneAlready = this.elevators.findIndex(elevator => {
-      return elevator.floorsToVisit.indexOf(to) !== -1
+      const index = elevator.floorsToVisit.indexOf(to) 
+      return  index !== -1 && index < 1
     })
 
     if(doneAlready !== -1){
@@ -71,12 +72,12 @@ export default class Building {
   addAbaj(startFloor, endLocation, destination){
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
   }
-  getFloorPotential( floor ){
+  getFloorPotential( floor, distance ){
     if ( this.sensors[floor] ){
-      return this.sensors[floor].count
+      return this.sensors[floor].count - distance * 0.1
     }
     else{
-      return -1
+      return 0
     }
   }
 }
