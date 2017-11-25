@@ -58,7 +58,6 @@ export default class Building {
       startFloor = valueBetween(0,this.floors)
     }
     const endLocation = 500
-    this.abajsCount += 1
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
   }
 }

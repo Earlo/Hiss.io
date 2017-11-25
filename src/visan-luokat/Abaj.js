@@ -32,6 +32,7 @@ export default class Abaj {
         const index = this.elevator.passengers.indexOf(this)
         this.elevator.passengers.splice(index,1)
         this.elevator = null
+        building.abajsCount += 1
         building.waitTime += this.waitTime
       }
       this.moveTowardsExit(building)
