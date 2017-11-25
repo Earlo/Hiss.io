@@ -1,11 +1,9 @@
-
-
 export default class Abaj {
   constructor(floor, position, destination) {
     this.floor = floor
     this.position = position
     this.destination = destination
-    this.speed = 5
+    this.speed = 8
     this.elevator = null
     this.waitStartTime = null
     this.waitTime = null
@@ -67,20 +65,22 @@ export default class Abaj {
 
   }
 
-  moveTowardsElevator( building ) {
+  moveTowardsElevator( building ){
   	if( this.position < building.elevatorZone[0] ){
   		this.position += this.speed
   	}
   	else if( this.position > building.elevatorZone[1] ){
   		this.position -= this.speed
-  	} else{
+  	}
+    else{
       this.useElevator( building )
     }
   }
 
   moveToElevator( elevator ){
-    if(!elevator.isFull()){
+    if(!elevator.isFull() || elevator.passengers.indexOf(this) !== -1){
       elevator.beingLoaded = true
+      elevator.passengers.push(this)
       if ( Math.abs(this.position - elevator.xPos) > this.speed){
         if( this.position < elevator.xPos ){
           this.position += this.speed
@@ -97,7 +97,6 @@ export default class Abaj {
           this.waitTime = 0
         }
         this.position = elevator.xPos
-        elevator.passengers.push(this)
         this.elevator = elevator
         this.elevator.setDestination( this.destination[0] )
       }
