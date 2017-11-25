@@ -21,8 +21,8 @@ export default class Building {
       new Sensor(i, 420, this)
 
     }
-    new Elevator(0, 20, 1, this)
-    new Elevator(this.floors-1, 60, 1, this)
+    new Elevator(0, 20, 4, this)
+    new Elevator(this.floors-1, 60, 4, this)
     this.elevatorZone = [20,80]
   }
 
