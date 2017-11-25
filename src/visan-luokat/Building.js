@@ -15,7 +15,7 @@ export default class Building {
     } 
     new Elevator(0, 20, 1, this)
 
-    this.abajs = [new Abaj(0,500,[1,200])]
+    this.abajs = []
     this.elevatorZone = [20,50]
   }
 
@@ -31,4 +31,15 @@ export default class Building {
   controlElevator(index, floor){
     this.elevators[index].setDestination(floor)
   }
+
+  addAbaj(){
+    const startFloor = valueBetween(0,this.floors)
+    const destination = [valueBetween(0,this.floors), valueBetween(100,400)]
+    const endLocation = 500
+    this.abajs.push(new Abaj(startFloor, endLocation, destination))
+  }
+}
+
+function valueBetween(min,max) {
+  return Math.floor(Math.random() * (max - min) + min);
 }

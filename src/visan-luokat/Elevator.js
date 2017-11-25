@@ -31,7 +31,7 @@ export default class Elevator {
     }
   }
   setFloor( floor ){
-    var i = this.building.elevatorMap[this.floor].indexOf(this)
+    let i = this.building.elevatorMap[this.floor].indexOf(this)
     if (i){
       this.building.elevatorMap[this.floor].splice(i, 1);
     }

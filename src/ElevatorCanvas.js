@@ -7,7 +7,7 @@ export default class ElevatorCanvas extends Component {
   render () {
     return <div>
       <canvas ref={canvas => this.canvas = canvas } id="hissi-canvas" width="600" height="600"/>
-      <Controls moveUp={this.moveUp} moveDown={this.moveDown}/>
+      <Controls moveUp={this.moveUp} moveDown={this.moveDown} addAbaj={this.addRandomAbaj}/>
     </div>
   }
 
@@ -24,5 +24,9 @@ export default class ElevatorCanvas extends Component {
 
   moveDown = () => {
     this.drawer.building.controlElevator(0, this.drawer.building.elevators[0].goingTo - 1)
+  }
+
+  addRandomAbaj = () => {
+    this.drawer.building.addAbaj()
   }
 }

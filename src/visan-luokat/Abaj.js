@@ -27,7 +27,7 @@ export default class Abaj {
       }
     }else{
       this.elevator = null
-      this.moveTowardsExit()
+      this.moveTowardsExit(building)
     }
 
   }
@@ -62,7 +62,7 @@ export default class Abaj {
   }
 
 
-  moveTowardsExit(){
+  moveTowardsExit(building){
     if ( Math.abs(this.position - this.destination[1]) > this.speed){
       if( this.position < this.destination[1] ){
         this.position += this.speed
@@ -72,9 +72,8 @@ export default class Abaj {
       }
     }
     else{
-      this.position = this.destination[1]
-      //DEBUG
-      this.destination[0] += 1
+      const index = building.abajs.indexOf(this)
+      building.abajs.splice(index,1)
     }
   }
 
@@ -83,6 +82,8 @@ export default class Abaj {
       if( (elevator.floor === this.floor) ){
         //console.log(this)
         this.moveToElevator( elevator )
+      } else {
+        elevator.setDestination(this.floor)
       }
     })
   }
