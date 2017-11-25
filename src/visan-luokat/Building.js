@@ -47,6 +47,14 @@ export default class Building {
   }
 
   findClosestFreeElevator(to){
+    const doneAlready = this.elevators.findIndex(elevator => {
+      return elevator.floorsToVisit.indexOf(to) !== -1
+    })
+
+    if(doneAlready !== -1){
+      return null
+    }
+
     const filtered = this.elevators.filter(e => {
       return e.isAvailable()
     }).sort((a,b) => {
@@ -63,8 +71,4 @@ export default class Building {
   addAbaj(startFloor, endLocation, destination){
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
   }
-}
-
-function valueBetween(min,max) {
-  return Math.floor(Math.random() * (max - min) + min);
 }

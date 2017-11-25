@@ -142,8 +142,7 @@ export default class Drawer {
     this.context.stroke();
   }
 
-  drawElevatorChute(x, type) {
-    const offset = type === 'smart'? 0: 600
+  drawElevatorChute(x) {
     const width = 24
     const height = this.building.buildingHeight
     this.context.strokeStyle = "#000"
