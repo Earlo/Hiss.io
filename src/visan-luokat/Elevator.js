@@ -35,17 +35,23 @@ export default class Elevator {
     return !this.isFull() && !this.moving()
   }
   move(){
-    if (!this.beingLoaded && this.floorsToVisit.length > 0){
-      let i = this.building.elevatorMap[this.floor].indexOf(this)
-      if (i !== -1){
-        this.building.elevatorMap[this.floor].splice(i, 1);
+    //console.log(this.building.getFloorPotential(this.floor, 0), this.building.getFloorPotential(this.goingTo, Math.abs(this.goingTo-this.floor)))
+    if (!this.beingLoaded){ 
+      if (this.floorsToVisit.length > 0 ){
+        let i = this.building.elevatorMap[this.floor].indexOf(this)
+        if (i !== -1){
+          this.building.elevatorMap[this.floor].splice(i, 1);
+        }
+        this.goingTo = this.getNextFloor()
+        this.direction = Math.sign(this.goingTo - this.floor)
+        this.inbetween += this.direction * this.speed
+        if ( Math.abs(this.inbetween) > 1){
+          this.inbetween = 0.0
+          this.setFloor(this.floor + this.direction)
+        }
       }
-      this.goingTo = this.getNextFloor()
-      this.direction = Math.sign(this.goingTo - this.floor)
-      this.inbetween += this.direction * this.speed
-      if ( Math.abs(this.inbetween) > 1){
-        this.inbetween = 0.0
-        this.setFloor(this.floor + this.direction)
+      else{
+        this.setDestination( this.building.findHighestPotential( this ) )
       }
     }
   }

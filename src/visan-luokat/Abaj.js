@@ -117,8 +117,8 @@ export default class Abaj {
       }
     }
     else{
-      
-      //this.destination[0] = Math.floor((Math.random() * building.floors)); 
+
+      //this.destination[0] = Math.floor((Math.random() * building.floors));
       const index = building.abajs.indexOf(this)
       building.abajs.splice(index,1)
     }
@@ -127,7 +127,7 @@ export default class Abaj {
   useElevator( building ){
     if (building.elevatorMap[this.floor].length > 0){
       this.moveToElevator( building.elevatorMap[this.floor][0] )
-    } 
+    }
     else{
       let closestElevator = building.findClosestFreeElevator( this.floor )
       if(closestElevator){

@@ -12,13 +12,13 @@ export default class Building {
     this.sensors = []
     this.abajs = []
     this.elevators = []
+    this.pressure = []
     this.elevatorMap = {}
     this.waitTime = 0
     this.abajsCount = 0
     const offset = type === 'smart'? 0: 600
-
-
       for (var i = 0; i < this.floors; i++) {
+        this.pressure.push(0)
         this.elevatorMap[ i ] = [];
         if(type === 'smart') {
           new Sensor(i, 420, this)
@@ -30,14 +30,15 @@ export default class Building {
   }
 
   update () {
-    this.elevators.forEach((elevator) => {
-      elevator.move();
-    })
     this.abajs.forEach((abaj) => {
       abaj.move( this );
     })
     this.sensors.forEach((sensor) => {
       sensor.update( this );
+    })
+
+    this.elevators.forEach((elevator) => {
+      elevator.move();
     })
 
   }
@@ -48,7 +49,8 @@ export default class Building {
 
   findClosestFreeElevator(to){
     const doneAlready = this.elevators.findIndex(elevator => {
-      return elevator.floorsToVisit.indexOf(to) !== -1
+      const index = elevator.floorsToVisit.indexOf(to) 
+      return  index !== -1 && index < 1
     })
 
     if(doneAlready !== -1){
@@ -70,5 +72,19 @@ export default class Building {
 
   addAbaj(startFloor, endLocation, destination){
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
+  }
+  getFloorPotential( floor, distance ){
+    return this.pressure[floor] - (1.0/this.floors)*distance
+  }
+  findHighestPotential( elevator ){
+    var max = -1
+    var target = -1
+    for (var i = 0; i < this.floors; i++) {
+      if (this.getFloorPotential(i, Math.abs(elevator.floor - 1) ) > max ){
+        max = this.getFloorPotential(i, Math.abs(elevator.floor - 1) )
+        target = i
+      }
+    }
+    return target
   }
 }

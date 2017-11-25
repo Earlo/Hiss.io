@@ -11,7 +11,7 @@ export default class Sensor {
   	return (this.floor )
   }
 
-  update(){
+  update( building ){
     let count = 0
     this.building.abajs.forEach((abaj) => {
       if (!abaj.elevator && abaj.floor === this.floor && abaj.destination[0] !== this.floor ){
@@ -28,5 +28,7 @@ export default class Sensor {
       }
       this.count = count
     }
+  	this.building.pressure[this.floor] = this.count
   }
+
 }
