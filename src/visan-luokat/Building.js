@@ -44,7 +44,7 @@ export default class Building {
   addAbaj(){
     const destination = [valueBetween(0,this.floors), valueBetween(100,400)]
     let startFloor = valueBetween(0,this.floors)
-    while (startFloor == destination[0]) {
+    while (startFloor === destination[0]) {
       startFloor = valueBetween(0,this.floors)
     }
     const endLocation = 500
