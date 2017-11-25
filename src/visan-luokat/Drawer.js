@@ -28,6 +28,7 @@ export default class Drawer {
     this.context.clearRect(0,0,600,600)
     this.drawBuilding()
     this.drawFloors()
+    this.drawAverageWaitTime()
     this.building.elevators.forEach((elevator) => {
         this.drawElevatorChute(elevator.xPos)
         this.drawElevator(elevator.xPos - 1, this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
@@ -92,6 +93,17 @@ export default class Drawer {
       context.lineTo(endX, y)
       this.context.strokeStyle = "#000"
       context.stroke()
+    }
+  }
+
+  drawAverageWaitTime(){
+    let waitTime = this.building.waitTime
+    let abajsCount = this.building.abajsCount
+    if(waitTime){
+      let formattedWaitTime = Math.round(waitTime / abajsCount / 1000 * 100) / 100
+      const waitTimeString = `${formattedWaitTime} s`
+      this.context.font="20px Monaco"
+      this.context.fillText(waitTimeString, 300,100)
     }
   }
 }

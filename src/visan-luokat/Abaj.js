@@ -5,6 +5,8 @@ export default class Abaj {
     this.destination = destination
     this.speed = 8
     this.elevator = null
+    this.waitStartTime = null
+    this.waitTime = null
   }
 
   getGraphicalHeight(){
@@ -26,7 +28,12 @@ export default class Abaj {
         this.floor = this.elevator.floor
       }
     }else{
-      this.elevator = null
+      if(this.elevator){
+        const index = this.elevator.passengers.indexOf(this)
+        this.elevator.passengers.splice(index,1)
+        this.elevator = null
+        building.waitTime += this.waitTime
+      }
       this.moveTowardsExit(building)
     }
 
@@ -54,9 +61,18 @@ export default class Abaj {
       }
     }
     else{
-      this.position = elevator.xPos
-      this.elevator = elevator
-      this.elevator.setDestination( this.destination[0] )
+      if(!elevator.isFull()){
+        if(!this.waitTime && this.waitStartTime) {
+          this.waitTime = new Date().getTime() - this.waitStartTime
+        } else {
+          this.waitTime = 0
+        }
+        console.log(this.waitTime)
+        this.position = elevator.xPos
+        elevator.passengers.push(this)
+        this.elevator = elevator
+        this.elevator.setDestination( this.destination[0] )
+      }
     }
   }
 
@@ -84,9 +100,8 @@ export default class Abaj {
     } 
     else{
       let closestElevator = building.findClosestFreeElevator( this.floor )
-      if(closestElevator){
-        closestElevator.setDestination(this.floor)
-      }
+      closestElevator.setDestination(this.floor)
+      if(!this.waitStartTime) this.waitStartTime = new Date().getTime()
     }
   }
 }
