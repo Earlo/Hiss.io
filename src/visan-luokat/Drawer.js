@@ -1,10 +1,5 @@
 import Building from './Building'
-import React from 'react';
-import Abaj from './Abaj'
 import elevatorImg from '../assets/elevator.png'
-
-//import * as url from '../../public/hissi1.ico';
-
 
 const getImage = (url) => {
     const myImage = new Image();
@@ -47,7 +42,7 @@ export default class Drawer {
   }
 
   drawElevator = (xPos, yPos ) => {
-    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, 32);
+    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, this.building.floorHeight);
   }
 
   drawAbaj(abaj) {
