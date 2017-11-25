@@ -148,7 +148,7 @@ export default class Drawer {
       let formattedWaitTime = Math.round(waitTime / abajsCount / 1000 * 100) / 100
       const waitTimeString = `Average time spent waiting for elevator: ${formattedWaitTime} s`
       this.context.font="20px Monaco"
-      this.context.fillText(waitTimeString, 100,100)
+      this.context.fillText(waitTimeString, 20,100)
     }
   }
 }

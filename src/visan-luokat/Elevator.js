@@ -18,7 +18,7 @@ export default class Elevator {
     this.setFloor( this.floor )
   }
   setDestination( dest ){
-    if (dest >= 0 && dest < this.floorCount){
+    if (dest >= 0 && dest < this.floorCount && dest !== this.floor){
       if(!this.hasAsDestination(dest)) this.floorsToVisit.push(dest)
     }
   }
@@ -26,10 +26,13 @@ export default class Elevator {
     return this.floorsToVisit.indexOf(dest) !== -1
   }
   moving(){
-    return this.floorsToVisit.length !== 0
+    return this.floorsToVisit.length > 0
   }
   isFull(){
     return this.passengers.length === this.capacity
+  }
+  isAvailable(){
+    return !this.isFull() && !this.moving()
   }
   move(){
     if (!this.beingLoaded && this.floorsToVisit.length > 0){
