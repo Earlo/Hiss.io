@@ -77,8 +77,8 @@ export default class Building {
     return this.pressure[floor] - (1.0/this.floors)*distance
   }
   findHighestPotential( elevator ){
-    var max = -1
-    var target = -1
+    var max = 0
+    var target = elevator.floor
     for (var i = 0; i < this.floors; i++) {
       if (this.getFloorPotential(i, Math.abs(elevator.floor - 1) ) > max ){
         max = this.getFloorPotential(i, Math.abs(elevator.floor - 1) )
