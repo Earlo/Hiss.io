@@ -1,10 +1,5 @@
 import Building from './Building'
-import React from 'react';
-import Abaj from './Abaj'
 import elevatorImg from '../assets/elevator.png'
-
-//import * as url from '../../public/hissi1.ico';
-
 
 const getImage = (url) => {
     const myImage = new Image();
