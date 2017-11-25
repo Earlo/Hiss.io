@@ -7,16 +7,17 @@ export default class Building {
     this.floorHeight = 32
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
-    this.elevators = [new Elevator(0, 0) ]
-    this.abajs = [new Abaj(1,500)]
+    this.elevators = [new Elevator(0, 20, 1) ]
+    this.abajs = [new Abaj(0,500,[1,500])]
+    this.elevatorZone = [20,50]
   }
 
   update () {
-    this.elevators.forEach(function(elevator) {
+    this.elevators.forEach((elevator) => {
       elevator.move();
     })
-    this.abajs.forEach(function(abaj) {
-      abaj.move();
+    this.abajs.forEach((abaj) => {
+      abaj.move( this );
     })
   }
 

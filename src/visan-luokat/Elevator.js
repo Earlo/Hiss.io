@@ -1,6 +1,7 @@
 export default class Elevator {
-  constructor(floor, capacity) {
+  constructor(floor, xPos, capacity) {
     this.floor = 0
+    this.xPos = xPos
     this.goingTo = floor
     this.inbetween = 0.0
     this.capacity = capacity

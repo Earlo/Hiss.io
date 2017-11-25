@@ -35,21 +35,21 @@ export default class Drawer {
     this.drawElevatorChute()
     this.drawFloors()
     this.building.elevators.forEach((elevator) => {
-        this.drawElevator(this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
+        this.drawElevator(elevator.xPos, this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
     })
     this.building.abajs.forEach((abaj) => {
         this.drawAbaj(abaj)
     })
   }
 
-  drawElevator = (height) => {
-      this.context.drawImage(this.images.elevatorImg, 20, height, 25, 32);
+  drawElevator = (xPos, yPos ) => {
+    this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, 32);
   }
 
   drawAbaj(abaj) {
     const { context } = this
     context.font="20px Monaco"
-    context.fillText("X", abaj.position, 595 - abaj.floor * this.building.floorHeight)
+    context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
   }
 
   drawBuilding(){
