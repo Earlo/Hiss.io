@@ -24,6 +24,7 @@ export default class Building {
     new Elevator(0, 20, 4, this)
     new Elevator(this.floors-1, 60, 4, this)
     this.elevatorZone = [20,80]
+    this.addAbaj()
   }
 
   update () {

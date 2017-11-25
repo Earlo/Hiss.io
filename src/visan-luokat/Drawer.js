@@ -1,5 +1,11 @@
 import Building from './Building'
 import elevatorImg from '../assets/elevator.png'
+import abajBody from '../assets/abaj/body_side.png';
+import abajCloserArm from '../assets/abaj/closer_arm.png';
+import abajFarArm from '../assets/abaj/far_arm.png';
+import abajCloserLeg from '../assets/abaj/leg_closer.png';
+import abajFarLeg from '../assets/abaj/leg_far.png';
+
 
 const getImage = (url) => {
     const myImage = new Image();
@@ -14,10 +20,18 @@ export default class Drawer {
     this.height = canvas.height
     this.context = this.canvas.getContext("2d")
   	this.building = new Building(10);
+  	this.rotateTick = 0;
 
   	//initializing image assets
   	this.images = {
-        elevatorImg: getImage(elevatorImg)
+        elevatorImg: getImage(elevatorImg),
+        abaj: {
+          body: getImage(abajBody),
+          closerLeg: getImage(abajCloserLeg),
+          farLeg: getImage(abajFarLeg),
+          closerArm: getImage(abajCloserArm),
+          farArm: getImage(abajFarArm)
+        }
     }
   	this.building = new Building(10)
   }
@@ -39,22 +53,53 @@ export default class Drawer {
     this.building.sensors.forEach((sensor) => {
         this.drawSensor(sensor)
     })
-
   }
 
   drawElevator = (xPos, yPos ) => {
     this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, this.building.floorHeight);
   }
 
+
+  drawImageRotation = (context, image, x, y, cx, cy, rotation, angleOffset) => {
+    this.context.save()
+    this.context.translate(cx, cy)
+    this.context.rotate(angleOffset + rotation * 0.1)
+    this.context.translate(-cx, -cy)
+    this.context.drawImage(image, x, y, image.width * 0.8, image.height * 0.8)
+    this.context.restore()
+  }
+
   drawAbaj(abaj) {
     const { context } = this
-    context.font="20px Monaco"
-    if (abaj.elevator){
-      context.fillText("O", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
+    const { body, closerLeg, farLeg, closerArm, farArm } = this.images.abaj
+
+      const x = abaj.position+6
+      const y = this.height - abaj.getGraphicalHeight() * this.building.floorHeight - 18 + 3
+    if (abaj.elevator || abaj.isIdling){
+        this.drawImageRotation(context, farArm, x-3, y-10, x+1, y-7, 0.3, 0.1);
+
+        this.drawImageRotation(context, farLeg, x-2, y, x+4-2, y+3, 6, -0.7);
+        //draw body
+        context.drawImage(body, x-4, y-21, body.width * 0.8, body.height * 0.8);
+
+        //draw closer arm and leg
+        this.drawImageRotation(context, closerLeg, x-5, y, x+4-5, y+3, -2.7, 0.4);
+        this.drawImageRotation(context, closerArm, x-3, y-10, x+1, y-7, 0, -0.3);
+
     }
     else{
-      context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
+
+        this.drawImageRotation(context, farArm, x-3, y-10, x+1, y-7, abaj.animationTick/10, -0.1);
+
+        this.drawImageRotation(context, farLeg, x-2, y, x+4-2, y+3, abaj.animationTick/7, -0.7);
+        //draw body
+        context.drawImage(body, x-4, y-21, body.width * 0.8, body.height * 0.8);
+
+        //draw closer arm and leg
+        this.drawImageRotation(context, closerLeg, x-5, y, x+4-5, y+3, -abaj.animationTick/10, 0.4);
+        this.drawImageRotation(context, closerArm, x-3, y-10, x+1, y-7, abaj.animationTick/10, -0.3);
     }
+
   }
 
   drawSensor(sensors) {

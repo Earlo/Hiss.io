@@ -1,12 +1,17 @@
+
+
 export default class Abaj {
   constructor(floor, position, destination) {
     this.floor = floor
     this.position = position
     this.destination = destination
-    this.speed = 8
+    this.speed = 5
     this.elevator = null
     this.waitStartTime = null
     this.waitTime = null
+    this.animationTick = 0
+    this.steppingForward = true
+    this.isIdling = false;
   }
 
   getGraphicalHeight(){
@@ -23,6 +28,18 @@ export default class Abaj {
     if(this.floor !== this.destination[0]){
       if(!this.elevator){
         this.moveTowardsElevator( building )
+        this.currState = 'moving_to_elevator';
+        if(this.steppingForward) {
+          this.animationTick += 15
+          if(this.animationTick >= 100) {
+            this.steppingForward = false
+          }
+        } else {
+          this.animationTick -= 10
+          if(this.animationTick <= 0) {
+            this.steppingForward = true
+          }
+        }
       }
       else{
         this.floor = this.elevator.floor
@@ -36,18 +53,28 @@ export default class Abaj {
         building.waitTime += this.waitTime
       }
       this.moveTowardsExit(building)
+      if(this.steppingForward) {
+        this.animationTick += 1
+        if(this.animationTick === 100) {
+          this.steppingForward = false
+        }
+      } else {
+        this.animationTick -= 1
+        if(this.animationTick === 0) {
+          this.steppingForward = true
+        }
+      }
     }
 
   }
 
-  moveTowardsElevator( building ){
+  moveTowardsElevator( building ) {
   	if( this.position < building.elevatorZone[0] ){
   		this.position += this.speed
   	}
   	else if( this.position > building.elevatorZone[1] ){
   		this.position -= this.speed
-  	}
-    else{
+  	} else{
       this.useElevator( building )
     }
   }
