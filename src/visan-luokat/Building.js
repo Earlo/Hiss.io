@@ -22,7 +22,7 @@ export default class Building {
     new Elevator(0, 60, 1, this)
 
 
-    this.elevatorZone = [20,50]
+    this.elevatorZone = [20,80]
   }
 
   update () {
@@ -42,10 +42,30 @@ export default class Building {
     this.elevators[index].setDestination(floor)
   }
 
-  findClosestFree(to){
-
+  findFreeIn(floor){
+    if (floor >= 0 && floor < this.floors){
+      for (var i = 0; i < this.elevatorMap[floor].length; i++) {
+        if (!this.elevatorMap[floor][i].moving()){
+          return this.elevatorMap[floor][i]
+        }
+      }
+    }
+    return null
   }
-  
+  findClosestFree(to){
+    for (var d = 0; d < this.floors; d++) {
+      var r = this.findFreeIn( to + d )
+      if (r !== null){
+        return r
+      }
+      r = this.findFreeIn( to - d )
+      if (r !== null){
+        return r
+      }
+
+    } 
+  }
+
   addAbaj(){
     const startFloor = valueBetween(0,this.floors)
     const destination = [valueBetween(0,this.floors), valueBetween(100,400)]

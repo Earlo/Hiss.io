@@ -53,7 +53,12 @@ export default class Drawer {
   drawAbaj(abaj) {
     const { context } = this
     context.font="20px Monaco"
-    context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
+    if (abaj.elevator){
+      context.fillText("O", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
+    }
+    else{
+      context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)      
+    }
   }
 
   drawSensor(sensors) {
