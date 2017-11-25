@@ -23,7 +23,6 @@ export default class Abaj {
   }
 
   move( building ) {
-    console.log('isWaiting', this.isWaiting)
     if(this.floor !== this.destination[0]){
       if(!this.elevator){
         this.moveTowardsElevator( building )
