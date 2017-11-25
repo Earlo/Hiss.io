@@ -1,18 +1,23 @@
-class Sensor {
+export default class Sensor {
   constructor(floor, position, building) {
     this.floor = floor
     this.position = position
     this.count = 0
     this.building = building
+    this.building.sensors.push(this)
   }
-  count(){
- 
+
+  getGraphicalHeight(){
+  	return (this.floor )
+  }
+
+  update(){
+ 	this.count = 0
   	this.building.abajs.forEach((abaj) => {
-    	console.log(abaj.position, abaj.floor);
+    	if (abaj.floor == this.floor && Math.abs( abaj.position - this.position ) < 80){
+    		this.count +=1
+    	}
 	});
 
-  }
-  move() {
-	console.log("moving abaj")
   }
 }

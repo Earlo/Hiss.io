@@ -1,5 +1,6 @@
 import Elevator from './Elevator'
 import Abaj from './Abaj'
+import Sensor from './Sensor'
 
 export default class Building {
   constructor(floors) {
@@ -16,6 +17,10 @@ export default class Building {
     new Elevator(0, 20, 1, this)
 
     this.abajs = []
+    this.sensors = []    
+    new Sensor(0, 120, this)
+    new Sensor(3, 120, this)
+
     this.elevatorZone = [20,50]
   }
 
@@ -26,6 +31,10 @@ export default class Building {
     this.abajs.forEach((abaj) => {
       abaj.move( this );
     })
+    this.sensors.forEach((sensor) => {
+      sensor.update( this );
+    })
+
   }
 
   controlElevator(index, floor){

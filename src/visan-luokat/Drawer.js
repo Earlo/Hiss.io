@@ -40,6 +40,10 @@ export default class Drawer {
     this.building.abajs.forEach((abaj) => {
         this.drawAbaj(abaj)
     })
+    this.building.sensors.forEach((sensor) => {
+        this.drawSensor(sensor)
+    })
+
   }
 
   drawElevator = (xPos, yPos ) => {
@@ -50,6 +54,12 @@ export default class Drawer {
     const { context } = this
     context.font="20px Monaco"
     context.fillText("X", abaj.position+6, this.height - abaj.getGraphicalHeight() * this.building.floorHeight)
+  }
+
+  drawSensor(sensors) {
+    const { context } = this
+    context.font="20px Monaco"
+    context.fillText(sensors.count.toString(), sensors.position+6, -10+ this.height - sensors.getGraphicalHeight() * this.building.floorHeight)
   }
 
   drawBuilding(){
