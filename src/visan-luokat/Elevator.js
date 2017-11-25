@@ -18,9 +18,11 @@ export default class Elevator {
   }
   setDestination( dest ){
     if (dest >= 0 && dest < this.floorCount){
-      let index = this.floorsToVisit.indexOf(dest) === -1
-      if(index) this.floorsToVisit.push(dest)
+      if(!this.hasAsDestination(dest)) this.floorsToVisit.push(dest)
     }
+  }
+  hasAsDestination( dest ){
+    return this.floorsToVisit.indexOf(dest) !== -1
   }
   moving(){
     return this.floorsToVisit.length !== 0
