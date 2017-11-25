@@ -9,6 +9,7 @@ export default class Abaj {
     this.waitTime = null
     this.animationTick = 0
     this.steppingForward = true
+    this.isWaiting = false;
   }
 
   getGraphicalHeight(){
@@ -22,6 +23,7 @@ export default class Abaj {
   }
 
   move( building ) {
+    console.log('isWaiting', this.isWaiting)
     if(this.floor !== this.destination[0]){
       if(!this.elevator){
         this.moveTowardsElevator( building )
@@ -68,15 +70,17 @@ export default class Abaj {
   	if( this.position < building.elevatorZone[0] ){
   		this.position += this.speed
   	}
-  	else if( this.position > building.elevatorZone[1] ){
+  	else if( this.position - 13 > building.elevatorZone[1] ){
   		this.position -= this.speed
   	}
     else{
+  	  this.isWaiting = true;
       this.useElevator( building )
     }
   }
 
   moveToElevator( elevator ){
+    this.isWaiting = false;
     if(!elevator.isFull() || elevator.passengers.indexOf(this) !== -1){
       elevator.beingLoaded = true
       elevator.passengers.push(this)
