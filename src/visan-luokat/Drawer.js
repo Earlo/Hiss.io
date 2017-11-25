@@ -46,19 +46,34 @@ export default class Drawer {
     for(const building of this.buildings) {
       building.update()
       //TODO set variable
+      const elevatorStartCoords = [];
+
       this.drawBuilding(building.type)
       this.drawFloors(building.type)
       this.drawAverageWaitTime(building)
+
       building.elevators.forEach((elevator) => {
-        this.drawElevatorChute(elevator.xPos, building.type)
+        elevatorStartCoords.push(elevator.xPos);
         this.drawElevator(elevator.xPos - 1, this.height - elevator.getGraphicalHeight() * this.building.floorHeight, building.type)
       })
+
       building.abajs.forEach((abaj) => {
         this.drawAbaj(abaj)
       })
+
+      building.elevators.forEach((elevator) => {
+        this.drawElevatorChute(elevator.xPos, building.type)
+      })
+
       building.sensors.forEach((sensor) => {
         this.drawSensor(sensor)
       })
+      //draw black between 2 elevators;
+
+      this.context.fillStyle = 'rgba(0, 0, 0, 0.8)'
+      const height = building.buildingHeight;
+      this.context.fillRect(building.type !== 'dumb' ? 45 : 645, 600 - height, 14, building.buildingHeight);
+      this.context.fillStyle = 'rgba(255, 255, 255)'
     }
   }
 
@@ -107,7 +122,7 @@ export default class Drawer {
       const isMirrored = abaj.floor === abaj.destination[0];
       let x = abaj.position+6
       let y = this.height - abaj.getGraphicalHeight() * this.building.floorHeight - 18 + 3
-    if (abaj.elevator || abaj.isIdling){
+    if (abaj.elevator || abaj.isWaiting){
         x += 5;
         this.drawImageRotation(context, farArm, x-3, y-10, x+1, y-7, 0.3, 0.1);
 
@@ -151,28 +166,36 @@ export default class Drawer {
   }
 
   drawElevatorChute(x) {
+    const { context } = this
     const width = 24
     const height = this.building.buildingHeight
-    this.context.strokeStyle = "#000"
-    this.context.strokeRect(x, 600 - height,width,height)
-    this.context.stroke();
+
+    context.fillStyle = 'rgba(121,121,121, 0.5)';
+    context.fillRect(x, 600 - height,width,height);
+
+    context.strokeStyle = "#000"
+    context.strokeRect(x, 600 - height,width,height)
+    context.stroke();
   }
 
   drawFloors(type) {
+    const { context } = this
     const offset = type === 'smart'? 0: 600
     const floorCount = this.building.floors
     const floorHeight = this.building.floorHeight
     const startX = 85 + offset
     const endX = startX + this.building.buildingWidth - 65
     let y
-    const { context } = this
     this.context.strokeStyle = "#000"
-    for(let i = 1; i < floorCount; i++){
+    for(let i = 1; i <= floorCount; i++){
       y = 600 - i * floorHeight
+      context.fillStyle = '#e9ff88';
+      context.fillRect(startX, y, endX - startX, floorHeight);
       context.beginPath()
       context.moveTo(startX, y)
       context.lineTo(endX, y)
       context.stroke()
+      context.fillStyle = '#000';
     }
   }
 
