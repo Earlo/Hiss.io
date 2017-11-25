@@ -60,19 +60,42 @@ export default class Drawer {
   }
 
 
-  drawImageRotation = (context, image, x, y, cx, cy, rotation, angleOffset) => {
-    this.context.save()
-    this.context.translate(cx, cy)
-    this.context.rotate(angleOffset + rotation * 0.1)
-    this.context.translate(-cx, -cy)
-    this.context.drawImage(image, x, y, image.width * 0.8, image.height * 0.8)
-    this.context.restore()
+  drawImageRotation = (context, image, x, y, cx, cy, rotation, angleOffset, mirrored) => {
+    context.save()
+    context.translate(cx, cy)
+    context.rotate(mirrored ? -(angleOffset - 0.20 + rotation * 0.1) :  angleOffset + rotation * 0.1)
+    context.translate(-cx, -cy)
+    if(mirrored)
+      this.DrawOrFlip(context, image, x, y, image.width * 0.8, image.height * 0.8, mirrored)
+    else
+      context.drawImage(image, x, y, image.width * 0.8, image.height * 0.8)
+    context.restore()
+  }
+
+  DrawOrFlip = (ctx, img,x,y, width, height, isMirrored) => {
+    if(isMirrored) {
+      // move to x + img's width
+      ctx.translate(x + img.width, y);
+
+      // scaleX by -1; this "trick" flips horizontally
+      ctx.scale(-1, 1);
+
+      // draw the img
+      // no need for x,y since we've already translated
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // always clean up -- reset transformations to default
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    } else {
+      ctx.drawImage(img, x, y, width, height)
+    }
   }
 
   drawAbaj(abaj) {
     const { context } = this
-    const { body, closerLeg, farLeg, closerArm, farArm } = this.images.abaj
 
+    const { body, closerLeg, farLeg, closerArm, farArm } = this.images.abaj
+      const isMirrored = abaj.floor === abaj.destination[0];
       const x = abaj.position+6
       const y = this.height - abaj.getGraphicalHeight() * this.building.floorHeight - 18 + 3
     if (abaj.elevator || abaj.isIdling){
@@ -89,15 +112,15 @@ export default class Drawer {
     }
     else{
 
-        this.drawImageRotation(context, farArm, x-3, y-10, x+1, y-7, abaj.animationTick/10, -0.1);
+      this.drawImageRotation(context, farArm, x-3, y-10, x+1, y-7, abaj.animationTick/10, -0.1, isMirrored);
 
-        this.drawImageRotation(context, farLeg, x-2, y, x+4-2, y+3, abaj.animationTick/7, -0.7);
-        //draw body
-        context.drawImage(body, x-4, y-21, body.width * 0.8, body.height * 0.8);
+      this.drawImageRotation(context, farLeg, x-2, y, x+4-2, y+3, abaj.animationTick/7, -0.7, isMirrored);
+      //draw body
+      this.DrawOrFlip(context, body, x-4, y-21, body.width * 0.8, body.height * 0.8, isMirrored)
 
-        //draw closer arm and leg
-        this.drawImageRotation(context, closerLeg, x-5, y, x+4-5, y+3, -abaj.animationTick/10, 0.4);
-        this.drawImageRotation(context, closerArm, x-3, y-10, x+1, y-7, abaj.animationTick/10, -0.3);
+      //draw closer arm and leg
+      this.drawImageRotation(context, closerLeg, x-5, y, x+4-5, y+3, -abaj.animationTick/10, 0.4, isMirrored);
+      this.drawImageRotation(context, closerArm, x-3, y-10, x+1, y-7, abaj.animationTick/10, -0.3, isMirrored);
     }
 
   }

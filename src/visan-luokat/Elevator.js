@@ -5,8 +5,7 @@ export default class Elevator {
     this.capacity = capacity
     this.building = building
     this.building.elevators.push(this)
-
-
+    
     this.floorCount = this.building.floors
     this.goingTo = floor
     this.inbetween = 0.0

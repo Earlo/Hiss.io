@@ -11,7 +11,6 @@ export default class Abaj {
     this.waitTime = null
     this.animationTick = 0
     this.steppingForward = true
-    this.isIdling = false;
   }
 
   getGraphicalHeight(){
@@ -25,10 +24,10 @@ export default class Abaj {
   }
 
   move( building ) {
+    console.log('params', [this.steppingForward, this.animationTick])
     if(this.floor !== this.destination[0]){
       if(!this.elevator){
         this.moveTowardsElevator( building )
-        this.currState = 'moving_to_elevator';
         if(this.steppingForward) {
           this.animationTick += 15
           if(this.animationTick >= 100) {
@@ -54,13 +53,13 @@ export default class Abaj {
       }
       this.moveTowardsExit(building)
       if(this.steppingForward) {
-        this.animationTick += 1
-        if(this.animationTick === 100) {
+        this.animationTick += 15
+        if(this.animationTick >= 100) {
           this.steppingForward = false
         }
       } else {
-        this.animationTick -= 1
-        if(this.animationTick === 0) {
+        this.animationTick -= 10
+        if(this.animationTick <= 0) {
           this.steppingForward = true
         }
       }
