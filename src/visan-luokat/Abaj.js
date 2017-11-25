@@ -53,16 +53,18 @@ export default class Abaj {
   }
 
   moveToElevator( elevator ){
-    if ( Math.abs(this.position - elevator.xPos) > this.speed){
-      if( this.position < elevator.xPos ){
-        this.position += this.speed
+    if(!elevator.isFull()){
+      elevator.beingLoaded = true
+      if ( Math.abs(this.position - elevator.xPos) > this.speed){
+        if( this.position < elevator.xPos ){
+          this.position += this.speed
+        }
+        else if( this.position > elevator.xPos ){
+          this.position -= this.speed
+        }
       }
-      else if( this.position > elevator.xPos ){
-        this.position -= this.speed
-      }
-    }
-    else{
-      if(!elevator.isFull()){
+      else{
+        elevator.beingLoaded = false
         if(!this.waitTime && this.waitStartTime) {
           this.waitTime = new Date().getTime() - this.waitStartTime
         } else {
