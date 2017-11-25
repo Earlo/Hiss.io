@@ -22,7 +22,7 @@ export default class Sensor {
  	if(count !== this.count){
  	  if(count > this.count){
       const elevator = this.building.findClosestFreeElevator(this.floor)
-      if(elevator.isAvailable()){
+      if(elevator && elevator.isAvailable()){
         elevator.setDestination(this.floor)
       }
     }

@@ -22,7 +22,8 @@ export default class Drawer {
     this.width = canvas.width
     this.height = canvas.height
     this.context = this.canvas.getContext("2d")
-  	this.building = new Building(10);
+  	this.building = new Building(10, 'smart');
+  	this.buildings = [this.building, new Building(10, 'dumb')]
   	this.rotateTick = 0;
 
   	//initializing image assets
@@ -37,36 +38,32 @@ export default class Drawer {
           farArm: getImage(abajFarArm)
         }
     }
-  	this.building = new Building(10)
   }
 
   update = () => {
-    this.building.update()
-    //TODO set variable
-    this.context.lineWidth = 2
-    this.context.clearRect(0,0,600,600)
-    this.drawBuilding()
-    this.drawFloors()
-    this.drawAverageWaitTime()
-    this.building.elevators.forEach((elevator) => {
-        this.drawElevatorChute(elevator.xPos)
-        this.drawElevator(elevator.xPos - 1, this.height - elevator.getGraphicalHeight() * this.building.floorHeight)
-    })
-    this.building.abajs.forEach((abaj) => {
+    this.context.clearRect(0, 0, 1200, 600)
+    for(const building of this.buildings) {
+      building.update()
+      //TODO set variable
+      this.drawBuilding(building.type)
+      this.drawFloors(building.type)
+      this.drawAverageWaitTime(building)
+      building.elevators.forEach((elevator) => {
+        this.drawElevatorChute(elevator.xPos, building.type)
+        this.drawElevator(elevator.xPos - 1, this.height - elevator.getGraphicalHeight() * this.building.floorHeight, building.type)
+      })
+      building.abajs.forEach((abaj) => {
         this.drawAbaj(abaj)
-    })
-    this.building.sensors.forEach((sensor) => {
+      })
+      building.sensors.forEach((sensor) => {
         this.drawSensor(sensor)
-    })
+      })
+    }
   }
 
   drawElevator = (xPos, yPos ) => {
-    this.context.fillStyle = "red"
     const height = this.building.buildingHeight
-    this.context.fillRect(xPos + 10, 600 - height, 3, 3)
-
     this.context.drawImage(this.images.elevatorRope, xPos + 10, 600 - height, this.images.elevatorRope.width, yPos - 600 + height)
-
     this.context.drawImage(this.images.elevatorImg, xPos, yPos, 25, this.building.floorHeight)
   }
 
@@ -143,11 +140,12 @@ export default class Drawer {
     context.fillText(sensors.count.toString(), sensors.position+6, -10+ this.height - sensors.getGraphicalHeight() * this.building.floorHeight)
   }
 
-  drawBuilding(){
+  drawBuilding(type){
+    const offset = type === 'smart'? 20: 620
     const height = this.building.buildingHeight
     const width = this.building.buildingWidth
     this.context.strokeStyle = "#FF0000"
-    this.context.strokeRect(20, 600 - height,width,height);
+    this.context.strokeRect(offset, 600 - height,width,height);
     this.context.stroke();
   }
 
@@ -159,10 +157,11 @@ export default class Drawer {
     this.context.stroke();
   }
 
-  drawFloors() {
+  drawFloors(type) {
+    const offset = type === 'smart'? 0: 600
     const floorCount = this.building.floors
     const floorHeight = this.building.floorHeight
-    const startX = 85
+    const startX = 85 + offset
     const endX = startX + this.building.buildingWidth - 65
     let y
     const { context } = this
@@ -176,14 +175,32 @@ export default class Drawer {
     }
   }
 
-  drawAverageWaitTime(){
-    let waitTime = this.building.waitTime
-    let abajsCount = this.building.abajsCount
-    if(waitTime){
+  drawAverageWaitTime(building){
+    const offset = building.type === 'smart'? 0: 600
+    let waitTime = building.waitTime
+    let abajsCount = building.abajsCount
+    if(abajsCount !== 0){
       let formattedWaitTime = Math.round(waitTime / abajsCount / 1000 * 100) / 100
       const waitTimeString = `Average time spent waiting for elevator: ${formattedWaitTime} s`
-      this.context.font="20px Monaco"
-      this.context.fillText(waitTimeString, 20,100)
+      this.context.font="16px Monaco"
+      this.context.fillText(waitTimeString, 20 + offset,100)
     }
+  }
+
+  addAbajs(){
+    const destination = [this.valueBetween(0,this.building.floors), this.valueBetween(100,400)]
+    let startFloor = this.valueBetween(0,this.building.floors)
+    while (startFloor === destination[0]) {
+      startFloor = this.valueBetween(0,this.building.floors)
+    }
+    for(const building of this.buildings){
+      const offset = building.type === 'smart'? 0: 600
+      const endLocation = 500 + offset
+      building.addAbaj(startFloor, endLocation, [destination[0], destination[1] + offset])
+    }
+  }
+
+  valueBetween(min,max) {
+    return Math.floor(Math.random() * (max - min) + min);
   }
 }

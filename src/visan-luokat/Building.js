@@ -3,27 +3,30 @@ import Abaj from './Abaj'
 import Sensor from './Sensor'
 
 export default class Building {
-  constructor(floors) {
+  constructor(floors, type) {
     this.floors = floors
     this.floorHeight = 40
     this.buildingHeight = this.floors * this.floorHeight
     this.buildingWidth = 500
-
+    this.type = type
     this.sensors = []
     this.abajs = []
     this.elevators = []
     this.elevatorMap = {}
     this.waitTime = 0
     this.abajsCount = 0
+    const offset = type === 'smart'? 0: 600
 
-    for (var i = 0; i < this.floors; i++) {
-      this.elevatorMap[i]=[];
-      new Sensor(i, 420, this)
 
-    }
+      for (var i = 0; i < this.floors; i++) {
+        this.elevatorMap[ i ] = [];
+        if(type === 'smart') {
+          new Sensor(i, 420, this)
+        }
+      }
     new Elevator(0, 20, 4, this)
     new Elevator(this.floors-1, 60, 4, this)
-    this.elevatorZone = [20,80]
+    this.elevatorZone = [20 + offset,80 + offset]
   }
 
   update () {
@@ -44,6 +47,14 @@ export default class Building {
   }
 
   findClosestFreeElevator(to){
+    const doneAlready = this.elevators.findIndex(elevator => {
+      return elevator.floorsToVisit.indexOf(to) !== -1
+    })
+
+    if(doneAlready !== -1){
+      return null
+    }
+
     const filtered = this.elevators.filter(e => {
       return e.isAvailable()
     }).sort((a,b) => {
@@ -57,17 +68,7 @@ export default class Building {
     return typeof filtered[0] === 'undefined'? sorted[0]: filtered[0]
   }
 
-  addAbaj(){
-    const destination = [valueBetween(0,this.floors), valueBetween(100,400)]
-    let startFloor = valueBetween(0,this.floors)
-    while (startFloor === destination[0]) {
-      startFloor = valueBetween(0,this.floors)
-    }
-    const endLocation = 500
+  addAbaj(startFloor, endLocation, destination){
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
   }
-}
-
-function valueBetween(min,max) {
-  return Math.floor(Math.random() * (max - min) + min);
 }

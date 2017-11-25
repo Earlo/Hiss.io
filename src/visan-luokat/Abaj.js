@@ -22,7 +22,6 @@ export default class Abaj {
   }
 
   move( building ) {
-    console.log('params', [this.steppingForward, this.animationTick])
     if(this.floor !== this.destination[0]){
       if(!this.elevator){
         this.moveTowardsElevator( building )
@@ -127,7 +126,9 @@ export default class Abaj {
     } 
     else{
       let closestElevator = building.findClosestFreeElevator( this.floor )
-      closestElevator.setDestination(this.floor)
+      if(closestElevator){
+        closestElevator.setDestination(this.floor)
+      }
       if(!this.waitStartTime) this.waitStartTime = new Date().getTime()
     }
   }
