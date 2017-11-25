@@ -3,7 +3,7 @@ export default class Abaj {
     this.floor = floor
     this.position = position
     this.destination = destination
-    this.speed = 4
+    this.speed = 8
     this.elevator = null
   }
 
@@ -57,6 +57,7 @@ export default class Abaj {
     else{
       this.position = elevator.xPos
       this.elevator = elevator
+      this.elevator.setDestination( this.destination[0] )
     }
   }
 

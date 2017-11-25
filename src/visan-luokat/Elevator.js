@@ -5,10 +5,13 @@ export default class Elevator {
     this.goingTo = floor
     this.inbetween = 0.0
     this.capacity = capacity
+    this.passengers  = []
+    this.direction = "UP" //"DOWN"
     this.speed = 0.1 //0.05
     this.moving = false
   }
   setDestination( dest ){
+    console.log("going to",dest)
     this.goingTo = dest
   }
   move(){
