@@ -12,11 +12,21 @@ export default class Sensor {
   }
 
   update(){
- 	this.count = 0
+ 	let count = 0
   	this.building.abajs.forEach((abaj) => {
-    	if (abaj.floor === this.floor && abaj.destination[0] !== this.floor ){
-    		this.count +=1
+    	if (!abaj.elevator && abaj.floor === this.floor && abaj.destination[0] !== this.floor ){
+    		count++
     	}
 	});
+
+ 	if(count !== this.count){
+ 	  if(count > this.count){
+      const elevator = this.building.findClosestFreeElevator(this.floor)
+      if(elevator.isAvailable()){
+        elevator.setDestination(this.floor)
+      }
+    }
+ 	  this.count = count
+  }
   }
 }

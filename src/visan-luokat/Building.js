@@ -24,7 +24,6 @@ export default class Building {
     new Elevator(0, 20, 4, this)
     new Elevator(this.floors-1, 60, 4, this)
     this.elevatorZone = [20,80]
-    this.addAbaj()
   }
 
   update () {
@@ -45,11 +44,17 @@ export default class Building {
   }
 
   findClosestFreeElevator(to){
+    const filtered = this.elevators.filter(e => {
+      return e.isAvailable()
+    }).sort((a,b) => {
+      return Math.abs(a.floor - to) - Math.abs(b.floor - to)
+    })
+
     const sorted = this.elevators.sort((a,b) => {
       return Math.abs(a.floor - to) - Math.abs(b.floor - to)
     })
 
-    return sorted[0]
+    return typeof filtered[0] === 'undefined'? sorted[0]: filtered[0]
   }
 
   addAbaj(){
