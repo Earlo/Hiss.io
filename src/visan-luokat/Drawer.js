@@ -39,6 +39,7 @@ export default class Drawer {
   update = () => {
     this.building.update()
     //TODO set variable
+    this.context.lineWidth = 2
     this.context.clearRect(0,0,600,600)
     this.drawBuilding()
     this.drawFloors()
@@ -131,12 +132,12 @@ export default class Drawer {
     const endX = startX + this.building.buildingWidth - 65
     let y
     const { context } = this
+    this.context.strokeStyle = "#000"
     for(let i = 1; i < floorCount; i++){
       y = 600 - i * floorHeight
       context.beginPath()
       context.moveTo(startX, y)
       context.lineTo(endX, y)
-      this.context.strokeStyle = "#000"
       context.stroke()
     }
   }
