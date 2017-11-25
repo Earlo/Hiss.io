@@ -34,7 +34,7 @@ export default class Elevator {
     return !this.isFull() && !this.moving()
   }
   move(){
-    if (!this.beingLoaded && this.floorsToVisit.length > 0){
+    if (!this.beingLoaded && this.floorsToVisit.length > 0 ){
       let i = this.building.elevatorMap[this.floor].indexOf(this)
       if (i !== -1){
         this.building.elevatorMap[this.floor].splice(i, 1);

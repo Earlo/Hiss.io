@@ -66,6 +66,14 @@ export default class Building {
     const endLocation = 500
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
   }
+  getFloorPotential( floor ){
+    if ( this.sensors[floor] ){
+      return this.sensors[floor].count
+    }
+    else{
+      return -1
+    }
+  }
 }
 
 function valueBetween(min,max) {
