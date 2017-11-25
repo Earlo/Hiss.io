@@ -25,6 +25,7 @@ export default class Drawer {
   	this.building = new Building(10, 'smart');
   	this.buildings = [this.building, new Building(10, 'dumb')]
   	this.rotateTick = 0;
+  	this.context.lineWidth = 2;
 
   	//initializing image assets
   	this.images = {
@@ -144,7 +145,7 @@ export default class Drawer {
     const offset = type === 'smart'? 20: 620
     const height = this.building.buildingHeight
     const width = this.building.buildingWidth
-    this.context.strokeStyle = "#FF0000"
+    this.context.strokeStyle = "#000"
     this.context.strokeRect(offset, 600 - height,width,height);
     this.context.stroke();
   }
