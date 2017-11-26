@@ -83,7 +83,9 @@ export default class Abaj {
     this.isWaiting = false;
     if(!elevator.isFull() || elevator.passengers.indexOf(this) !== -1){
       elevator.beingLoaded = true
-      elevator.passengers.push(this)
+      if (elevator.passengers.indexOf(this) == -1){
+        elevator.passengers.push(this)
+      }
       if ( Math.abs(this.position - elevator.xPos) > this.speed){
         if( this.position < elevator.xPos ){
           this.position += this.speed

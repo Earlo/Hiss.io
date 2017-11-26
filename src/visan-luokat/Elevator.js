@@ -22,6 +22,17 @@ export default class Elevator {
       if(!this.hasAsDestination(dest)) this.floorsToVisit.push(dest)
     }
   }
+  overrideDestination( dest ){
+    if (dest >= 0 && dest < this.floorCount && dest !== this.floor){
+      const i = this.building.elevatorMap[this.goingTo].indexOf(this)
+      if (i !== -1){
+        this.building.elevatorMap[this.goingTo].splice(i, 1);
+      }
+
+      this.floorsToVisit = [dest]
+    }
+  }
+
   hasAsDestination( dest ){
     return this.floorsToVisit.indexOf(dest) !== -1
   }
@@ -38,21 +49,23 @@ export default class Elevator {
     //console.log(this.building.getFloorPotential(this.floor, 0), this.building.getFloorPotential(this.goingTo, Math.abs(this.goingTo-this.floor)))
     this.direction = 0
     if (!this.beingLoaded){
+      if (this.passengers.length === 0){
+        this.overrideDestination( this.building.findHighestPotential( this ) )
+      }
       if (this.floorsToVisit.length > 0 ){
-        let i = this.building.elevatorMap[this.floor].indexOf(this)
+        this.direction = Math.sign(this.goingTo - this.floor)
+        this.goingTo = this.getNextFloor()
+
+        const i = this.building.elevatorMap[this.floor].indexOf(this)
         if (i !== -1){
           this.building.elevatorMap[this.floor].splice(i, 1);
         }
-        this.goingTo = this.getNextFloor()
-        this.direction = Math.sign(this.goingTo - this.floor)
+
         this.inbetween += this.direction * this.speed
         if ( Math.abs(this.inbetween) > 1){
           this.inbetween = 0.0
           this.setFloor(this.floor + this.direction)
         }
-      }
-      else{
-        this.setDestination( this.building.findHighestPotential( this ) )
       }
     }
   }
@@ -63,8 +76,12 @@ export default class Elevator {
     }
     this.floor = floor
 
-    this.building.elevatorMap[this.goingTo].push(this)
+    const i = this.building.elevatorMap[this.goingTo].indexOf(this)
+    if (i !== -1){
+      this.building.elevatorMap[this.goingTo].splice(i, 1);
+    }
 
+    this.building.elevatorMap[this.goingTo].push(this)
   }
 
   getGraphicalHeight(){

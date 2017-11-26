@@ -244,10 +244,13 @@ export default class Drawer {
     const startX = 85 + offset
     const endX = startX + this.building.buildingWidth - 65
     let y
+    const colours = ['#aa0000','#00aa00','#0000aa','#aabb00']
     this.context.strokeStyle = "#000"
     for(let i = 1; i <= floorCount; i++){
       y = 600 - i * floorHeight
-      context.fillStyle = '#e9ff88';
+      //context.fillStyle = //'#e9ff88';
+      context.fillStyle = colours[this.building.elevatorMap[i-1].length] //'#e9ff88';
+      
       context.fillRect(startX, y, endX - startX, floorHeight);
       context.beginPath()
       context.moveTo(startX, y)

@@ -78,18 +78,19 @@ export default class Building {
     this.abajs.push(new Abaj(startFloor, endLocation, destination))
   }
   getFloorPotential( floor, distance ){
-    return ( this.pressure[floor] - (1.0/this.floors)*distance) / this.elevatorMap[floor].length
+    return ( this.pressure[floor] + ( (this.floors - distance)/this.floors) ) / (this.elevatorMap[floor].length + 1)
   }
   findHighestPotential( elevator ){
     var max = 0.0
     var target = elevator.floor
     for (var i = 0; i < this.floors; i++) {
-      var potential = this.getFloorPotential(i, Math.abs(elevator.floor - 1) )
+      var potential = this.getFloorPotential(i, Math.abs(elevator.floor - i) )
       if (i == elevator.floor){
-        potential * 2
+        potential = potential*2
       }
       if ( potential > max ){
-        max = this.getFloorPotential(i, Math.abs(elevator.floor - 1) )
+        console.log(potential, "potentia from", elevator.floor, "to", i)
+        max = potential
         target = i
       }
     }
