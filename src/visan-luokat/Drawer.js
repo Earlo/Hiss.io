@@ -6,6 +6,27 @@ import abajFarArm from '../assets/abaj/basic/far_arm.png';
 import abajCloserLeg from '../assets/abaj/basic/leg_closer.png';
 import abajFarLeg from '../assets/abaj/basic/leg_far.png';
 
+import abajFarArm2 from '../assets/abaj/basic/far_arm_2.png';
+import abajBody2 from '../assets/abaj/basic/body_side2_black.png';
+import abajCloserArm2 from '../assets/abaj/basic/closer_arm_2.png';
+import abajCloserLeg2 from '../assets/abaj/basic/leg_closer_2.png';
+import abajFarLeg2 from '../assets/abaj/basic/leg_far_2.png';
+
+import abajBody3 from '../assets/abaj/basic/body_side3.png';
+import abajCloserArm3 from '../assets/abaj/basic/closer_arm3.png';
+import abajCloserLeg3 from '../assets/abaj/basic/leg_closer_3.png';
+import abajFarLeg3 from '../assets/abaj/basic/leg_far_3.png';
+
+import abajBody1 from '../assets/abaj/basic/body_side1.png';
+import abajCloserArm1 from '../assets/abaj/basic/closer_arm_1.png';
+import abajCloserLeg1 from '../assets/abaj/basic/leg_closer_1.png';
+import abajFarLeg1 from '../assets/abaj/basic/leg_far_1.png';
+
+import abajBody4 from '../assets/abaj/basic/body_side4.png';
+import abajCloserArm4 from '../assets/abaj/basic/closer_arm4.png';
+import abajCloserLeg4 from '../assets/abaj/basic/leg_closer_4.png';
+import abajFarLeg4 from '../assets/abaj/basic/leg_far_4.png';
+
 import elevatorRope from '../assets/hissi/elevator_rope.png';
 
 
@@ -31,11 +52,39 @@ export default class Drawer {
   	this.images = {
         elevatorImg: getImage(elevatorImg),
         elevatorRope: getImage(elevatorRope),
-        abaj: {
+        abaj0: {
           body: getImage(abajBody),
           closerLeg: getImage(abajCloserLeg),
           farLeg: getImage(abajFarLeg),
           closerArm: getImage(abajCloserArm),
+          farArm: getImage(abajFarArm)
+        },
+        abaj1: {
+          body: getImage(abajBody1),
+          closerLeg: getImage(abajCloserLeg1),
+          farLeg: getImage(abajFarLeg1),
+          closerArm: getImage(abajCloserArm1),
+          farArm: getImage(abajFarArm)
+        },
+        abaj2: {
+          body: getImage(abajBody2),
+          closerLeg: getImage(abajCloserLeg2),
+          farLeg: getImage(abajFarLeg2),
+          closerArm: getImage(abajCloserArm2),
+          farArm: getImage(abajFarArm2)
+        },
+        abaj3: {
+          body: getImage(abajBody3),
+          closerLeg: getImage(abajCloserLeg3),
+          farLeg: getImage(abajFarLeg3),
+          closerArm: getImage(abajCloserArm3),
+          farArm: getImage(abajFarArm)
+        },
+        abaj4: {
+          body: getImage(abajBody4),
+          closerLeg: getImage(abajCloserLeg4),
+          farLeg: getImage(abajFarLeg4),
+          closerArm: getImage(abajCloserArm4),
           farArm: getImage(abajFarArm)
         }
     }
@@ -118,7 +167,7 @@ export default class Drawer {
   drawAbaj(abaj) {
     const { context } = this
 
-    const { body, closerLeg, farLeg, closerArm, farArm } = this.images.abaj
+    const { body, closerLeg, farLeg, closerArm, farArm } = this.images[abaj.abajType]
       const isMirrored = abaj.floor === abaj.destination[0];
       let x = abaj.position+6
       let y = this.height - abaj.getGraphicalHeight() * this.building.floorHeight - 18 + 3

@@ -10,6 +10,7 @@ export default class Abaj {
     this.animationTick = 0
     this.steppingForward = true
     this.isWaiting = false;
+    this.abajType = 'abaj' + Math.round(Math.random()*4)
   }
 
   getGraphicalHeight(){
