@@ -62,7 +62,7 @@ export default class Drawer {
       })
 
       building.elevators.forEach((elevator) => {
-        this.drawElevatorChute(elevator.xPos, building.type)
+        this.drawElevatorChute(elevator.xPos)
       })
 
       building.sensors.forEach((sensor) => {
@@ -152,8 +152,17 @@ export default class Drawer {
 
   drawSensor(sensors) {
     const { context } = this
-    context.font="20px Monaco"
-    context.fillText(sensors.count.toString(), sensors.position+6, -10+ this.height - sensors.getGraphicalHeight() * this.building.floorHeight)
+    if (sensors.building.type === 'smart'){
+      context.font="20px Monaco"
+    }
+    else{
+      context.font="10px Monaco"      
+    }
+    //console.log( this.building.pressure[sensors.floor])
+    context.fillText(sensors.building.pressure[sensors.floor].toString(), sensors.position+6, -10+ this.height - sensors.getGraphicalHeight() * this.building.floorHeight)
+    
+    //context.fillText(this.building.pressure[sensors.floor].toString(), sensors.position+6, -10+ this.height - sensors.getGraphicalHeight() * this.building.floorHeight)
+    //context.fillText(sensors.count.toString(), sensors.position+6, -10+ this.height - sensors.getGraphicalHeight() * this.building.floorHeight)
   }
 
   drawBuilding(type){

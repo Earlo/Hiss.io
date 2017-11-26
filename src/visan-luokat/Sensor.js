@@ -5,6 +5,8 @@ export default class Sensor {
     this.count = 0
     this.building = building
     this.building.sensors.push(this)
+	this.weight = this.building.type==='smart'?1:0
+
   }
 
   getGraphicalHeight(){
@@ -19,16 +21,11 @@ export default class Sensor {
       }
     });
 
-    if(count !== this.count){
-      if(count > this.count){
-        const elevator = this.building.findClosestFreeElevator(this.floor)
-        if(elevator && elevator.isAvailable()){
-          elevator.setDestination(this.floor)
-        }
-      }
-      this.count = count
-    }
-  	this.building.pressure[this.floor] = this.count
+  	this.count = count
+    //console.log(this.building.type, this.count * this.weight)
+    if (this.building.type == 'smart'){
+	  	this.building.pressure[this.floor] += (this.count * this.weight)
+	}
   }
 
 }

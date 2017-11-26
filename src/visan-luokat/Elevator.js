@@ -12,7 +12,7 @@ export default class Elevator {
     this.inbetween = 0.0
     this.passengers  = []
     this.direction = 1
-    this.speed = 0.1 //0.05
+    this.speed = 0.15 //0.05
     this.beingLoaded = false
     this.floorsToVisit = []
     this.setFloor( this.floor )
@@ -36,7 +36,8 @@ export default class Elevator {
   }
   move(){
     //console.log(this.building.getFloorPotential(this.floor, 0), this.building.getFloorPotential(this.goingTo, Math.abs(this.goingTo-this.floor)))
-    if (!this.beingLoaded){ 
+    this.direction = 0
+    if (!this.beingLoaded){
       if (this.floorsToVisit.length > 0 ){
         let i = this.building.elevatorMap[this.floor].indexOf(this)
         if (i !== -1){
@@ -62,7 +63,7 @@ export default class Elevator {
     }
     this.floor = floor
 
-    this.building.elevatorMap[this.floor].push(this)
+    this.building.elevatorMap[this.goingTo].push(this)
 
   }
 

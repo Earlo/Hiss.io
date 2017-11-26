@@ -3,7 +3,7 @@ export default class Abaj {
     this.floor = floor
     this.position = position
     this.destination = destination
-    this.speed = 8
+    this.speed = 6
     this.elevator = null
     this.waitStartTime = null
     this.waitTime = null
@@ -124,14 +124,16 @@ export default class Abaj {
   }
 
   useElevator( building ){
-    if (building.elevatorMap[this.floor].length > 0){
+    if (building.elevatorMap[this.floor].length > 0 && building.elevatorMap[this.floor][0].direction === 0){
       this.moveToElevator( building.elevatorMap[this.floor][0] )
     }
     else{
-      let closestElevator = building.findClosestFreeElevator( this.floor )
-      if(closestElevator){
-        closestElevator.setDestination(this.floor)
-      }
+      //let closestElevator = building.findClosestFreeElevator( this.floor )
+      //if(closestElevator){
+      //  closestElevator.setDestination(this.floor)
+      //}
+      building.pressure[this.floor] += 2
+      console.log("adding presusrs", building.pressure[this.floor])
       if(!this.waitStartTime) this.waitStartTime = new Date().getTime()
     }
   }
